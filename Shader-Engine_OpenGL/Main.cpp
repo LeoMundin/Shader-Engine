@@ -4,10 +4,13 @@
 #include <GLFW/glfw3.h>
 
 
-int SCREEN_WIDTH = 800;
-int SCREEN_HEIGHT = 600;
 
 
+
+
+
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 
 
 /// <summary>
@@ -19,6 +22,24 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
+
+
+/// <summary>
+/// Processes all of the relevant input events which occur within the given window.
+/// </summary>
+/// <param name="window"> The window from which to read the appropriate input events, </param>
+void processInput(GLFWwindow* window)
+{
+    // Close window
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) 
+    {
+        glfwSetWindowShouldClose(window, true);
+    }
+}
+
+
+
+
 
 int main()
 {
@@ -33,7 +54,7 @@ int main()
     // Creates a window object, 
     // Checks that the window has been created succesfully,
     // then sets this window as the main context on the current thread.
-    GLFWwindow* mainWindow = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* mainWindow = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Shader Engine" , NULL, NULL);
     if (mainWindow == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -52,12 +73,40 @@ int main()
 
 
 
-    // Sets the initial size for the OpenGL rendering window.
-    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    // Register the "framebuffer_size_callback" function to the GLFW window; for whenever it gets resized.
+
+
+    // Sets the initial size for the OpenGL rendering window. 
+    // Then registers the "framebuffer_size_callback" function to the GLFW window; for whenever it gets resized.
+    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     glfwSetFramebufferSizeCallback(mainWindow, framebuffer_size_callback);
 
+
+
+
+
+
+    // Render Loop
+    while (!glfwWindowShouldClose(mainWindow))
+    {
+
+        processInput(mainWindow);
+
+
+        // Rendering Commands here...
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+
+        glfwSwapBuffers(mainWindow);// Swaps the rendered, back buffer, with the front buffer and displays it to the specified window
+        glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
+    }
+
+
+
+
+    // Clean up all GLFW resources
+    glfwTerminate();
     return 0;
 }
 
