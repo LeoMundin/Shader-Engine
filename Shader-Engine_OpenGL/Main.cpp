@@ -4,13 +4,43 @@
 #include <GLFW/glfw3.h>
 
 
+#pragma region Shader Code
+
+const char* vertexShaderSource = "#version 330 core\n"
+                                 "layout (location = 0) in vec3 aPos;\n"
+                                 "void main()\n"
+                                 "{\n"
+                                 "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+                                 "}\0";
 
 
+const char* fragmentShaderSource = "#version 330 core\n"
+                                   "out vec4 FragColor;\n"
+                                   "void main()\n"
+                                   "{\n"
+                                   "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+                                   "}\n";
+
+#pragma endregion
 
 
+// Object data - 2D Triangle
+float vertices[] = {
+-0.5f, -0.5f, 0.0f,
+ 0.5f, -0.5f, 0.0f,
+ 0.0f,  0.5f, 0.0f
+};
+
+
+#pragma region Global Variables
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
+
+#pragma endregion
+
+
+//------------------------------------------- HELPER FUNCTIONS -------------------------------------------------------
 
 
 /// <summary>
@@ -38,11 +68,13 @@ void processInput(GLFWwindow* window)
 }
 
 
-
+//------------------------------------------- ENGINE CODE -------------------------------------------------------
 
 
 int main()
 {
+
+#pragma region Libary & Window Setup
 
     // Set Up GLFW for window rendering
     glfwInit();
@@ -71,17 +103,99 @@ int main()
         return -1;
     }
 
-
-
-
-
-
     // Sets the initial size for the OpenGL rendering window. 
     // Then registers the "framebuffer_size_callback" function to the GLFW window; for whenever it gets resized.
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     glfwSetFramebufferSizeCallback(mainWindow, framebuffer_size_callback);
 
+#pragma endregion
 
+
+
+#pragma region Vertex Buffer Object
+
+    // Generate a vertex buffer object to send batches of vertex data.
+    unsigned int VBO;
+    glGenBuffers(1, &VBO);
+
+    // This vertex buffer object then binds to openGls Array Buffer where we wish to asign our data.
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    // Our data is then sent to that buffer on the GPU and informed on how we want this data to be managed on the GPU.
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+#pragma endregion
+
+
+
+#pragma region Vertex Shader
+
+    // Creates our shader object and defines it as a Vertex Shader.
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+    // Our Shader code is then attached to the Shader Object which then gets compiled at runtime.
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glCompileShader(vertexShader);
+
+    // We then check if the Shader compiled correctly.
+    int  success;
+    char infoLog[512];
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+    }
+
+#pragma endregion
+
+#pragma region Fragment Shader
+
+    // The same process is then repeated for the Fragment Shader
+    unsigned int fragmentShader;
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragmentShader);
+
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+
+    }
+
+#pragma endregion
+
+#pragma region Shader Program
+
+    // An ID is generated for our shader program.
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+
+    // Our shaders are then attached together inside the shader program.
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+
+    // Our Specifed and set up shader program is then linked as the active shader program for future use.
+    glLinkProgram(shaderProgram);
+
+    // Then like always, we check this process has linked and been set up correctly.
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    if (!success) {
+        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::PROGRAM::COMPILATION_FAILED\n" << infoLog << std::endl;
+    }
+
+    // Sets the created,linked and tested shader program as a part of the current render state.
+    glUseProgram(shaderProgram);
+
+    // Now that the shader objects have been used and linked into the shader program, they can now be deleted to save memory space. <- not essential but recommended
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+#pragma endregion
 
 
 
@@ -100,9 +214,8 @@ int main()
 
         glfwSwapBuffers(mainWindow);// Swaps the rendered, back buffer, with the front buffer and displays it to the specified window
         glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
+
     }
-
-
 
 
     // Clean up all GLFW resources
