@@ -74,6 +74,7 @@ void processInput(GLFWwindow* window)
 int main()
 {
 
+    // Enables the correct libaries with the right settings and, creates a window for rendering.
 #pragma region Libary & Window Setup
 
     // Set Up GLFW for window rendering
@@ -111,7 +112,7 @@ int main()
 #pragma endregion
 
 
-
+    // Copies the vertex data to a buffer on the GPU.
 #pragma region Vertex Buffer Object
 
     // Generate a vertex buffer object to send batches of vertex data.
@@ -126,8 +127,25 @@ int main()
 
 #pragma endregion
 
+    // Decides how a vertex buffer will be interpreted when drawring.
+#pragma region Vertex Array Object
+
+    // Create a Vertex Array Object to inform the GPU how to interpret the currently bound Vertex Buffer.
+    unsigned int VAO;
+    glGenVertexArrays(1, &VAO);
+
+    // Bind the Vertex array we want to use. 
+    // NOTE: This is usually done right before drawring and unbound straight after, to avoid interpreting the vertex buffer incorrectly.
+    glBindVertexArray(VAO);
+
+    // Configure the vertex attribute pointers for our chosen vertex buffer
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+#pragma endregion
 
 
+    // Compiles the Vertex Shader.
 #pragma region Vertex Shader
 
     // Creates our shader object and defines it as a Vertex Shader.
@@ -150,6 +168,7 @@ int main()
 
 #pragma endregion
 
+    // Compiles the Fragment Shader.
 #pragma region Fragment Shader
 
     // The same process is then repeated for the Fragment Shader
@@ -168,6 +187,7 @@ int main()
 
 #pragma endregion
 
+    // Links the shaders together so that their inputs and outputs match up for render calls.
 #pragma region Shader Program
 
     // An ID is generated for our shader program.
@@ -210,6 +230,9 @@ int main()
         // Rendering Commands here...
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        // Draw Triangle
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
 
         glfwSwapBuffers(mainWindow);// Swaps the rendered, back buffer, with the front buffer and displays it to the specified window
