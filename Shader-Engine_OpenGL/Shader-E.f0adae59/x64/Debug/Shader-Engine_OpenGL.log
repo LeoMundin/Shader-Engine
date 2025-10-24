@@ -1,2 +1,3 @@
 ﻿  Main.cpp
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(268,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Shader-Engine_OpenGL.vcxproj -> E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\x64\Debug\Shader-Engine_OpenGL.exe

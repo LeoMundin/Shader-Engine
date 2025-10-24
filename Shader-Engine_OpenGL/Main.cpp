@@ -8,17 +8,21 @@
 
 const char* vertexShaderSource = "#version 330 core\n"
                                  "layout (location = 0) in vec3 aPos;\n"
+                                 "out vec4 vertexColor;\n"
                                  "void main()\n"
                                  "{\n"
                                  "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+                                 "   vertexColor = vec4(0.5, 0.0, 0.0, 1.0);\n"
                                  "}\0";
 
 
 const char* fragmentShaderSource = "#version 330 core\n"
+                                   "uniform vec4 ourColor;\n"
+                                   "in vec4 vertexColor;\n"
                                    "out vec4 FragColor;\n"
                                    "void main()\n"
                                    "{\n"
-                                   "    FragColor = vec4(0.49f, 1.0f, 0.83f, 1.0f);\n"
+                                   "    FragColor = ourColor;\n"
                                    "}\n";
 
 #pragma endregion
@@ -257,6 +261,23 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+
+
+        // Samples the time and varies the green value from 0-1 by time and a sine wave
+        float timeValue = glfwGetTime();
+        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+
+        // Queries the uniform location on our shader program, with the name of the uniform variable.
+        // Note: -1 from this query means it could not be found.
+        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+
+        // Activate the shader then update the uniform at the position we found on our active shader program.
+        glUseProgram(shaderProgram);
+        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
+
+
 
         // Draw Rectangle.
         glUseProgram(shaderProgram);
