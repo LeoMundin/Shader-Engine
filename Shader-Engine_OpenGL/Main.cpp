@@ -2,7 +2,7 @@
 
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
-
+#include "VAO.h"
 
 #pragma region Shader Code
 
@@ -18,17 +18,38 @@ const char* fragmentShaderSource = "#version 330 core\n"
                                    "out vec4 FragColor;\n"
                                    "void main()\n"
                                    "{\n"
-                                   "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+                                   "    FragColor = vec4(0.49f, 1.0f, 0.83f, 1.0f);\n"
                                    "}\n";
 
 #pragma endregion
 
 
-// Object data - 2D Triangle
-float vertices[] = {
--0.5f, -0.5f, 0.0f,
- 0.5f, -0.5f, 0.0f,
- 0.0f,  0.5f, 0.0f
+
+
+float lefTriangleVertices[] = {
+     -1.0f, -0.5f, 0.0f,
+     0.0f, -0.5f, 0.0f,
+     -0.5f,  0.5f, 0.0f,
+
+     
+};
+
+float rightTriangleVertices[]{
+     0.0f, -0.5f, 0.0f,
+     1.0f, -0.5f, 0.0f,
+     0.5f,  0.5f, 0.0f
+};
+
+//rectangle
+float rectangleVertices[] = {
+     0.5f,  0.5f, 0.0f,  // top right
+     0.5f, -0.5f, 0.0f,  // bottom right
+    -0.5f, -0.5f, 0.0f,  // bottom left
+    -0.5f,  0.5f, 0.0f   // top left 
+};
+unsigned int indices[] = {  // note that we start from 0!
+    0, 1, 3,   // first triangle
+    1, 2, 3    // second triangle
 };
 
 
@@ -115,34 +136,38 @@ int main()
     // Copies the vertex data to a buffer on the GPU.
 #pragma region Vertex Buffer Object
 
-    // Generate a vertex buffer object to send batches of vertex data.
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-
-    // This vertex buffer object then binds to openGls Array Buffer where we wish to asign our data.
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    // Our data is then sent to that buffer on the GPU and informed on how we want this data to be managed on the GPU.
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    VBO vbo1 = VBO(lefTriangleVertices, sizeof(lefTriangleVertices));
+    VBO vbo2 = VBO(rightTriangleVertices, sizeof(rightTriangleVertices));
 
 #pragma endregion
 
     // Decides how a vertex buffer will be interpreted when drawring.
 #pragma region Vertex Array Object
 
-    // Create a Vertex Array Object to inform the GPU how to interpret the currently bound Vertex Buffer.
-    unsigned int VAO;
-    glGenVertexArrays(1, &VAO);
+    VAO vao1,vao2 = VAO();
 
-    // Bind the Vertex array we want to use. 
-    // NOTE: This is usually done right before drawring and unbound straight after, to avoid interpreting the vertex buffer incorrectly.
-    glBindVertexArray(VAO);
-
-    // Configure the vertex attribute pointers for our chosen vertex buffer
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+    // Configure array attributes
+    vao1.LinkVBO(vbo1);
+    vao2.LinkVBO(vbo2);
 
 #pragma endregion
+
+    // Creates and binds the Element buffer which will in turn be tied into the VAO which is currently bound.
+#pragma region Element Buffer Object
+
+
+    // Create an Element buffer object
+    unsigned int EBO;
+    glGenBuffers(1, &EBO);
+
+    // Bind the new object and copy the "indicies" data over to that buffer with the correct "GL_ELEMENT_ARRAY_BUFFER" target.
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+#pragma endregion
+
+
+
 
 
     // Compiles the Vertex Shader.
@@ -209,7 +234,7 @@ int main()
     }
 
     // Sets the created,linked and tested shader program as a part of the current render state.
-    glUseProgram(shaderProgram);
+   // glUseProgram(shaderProgram);
 
     // Now that the shader objects have been used and linked into the shader program, they can now be deleted to save memory space. <- not essential but recommended
     glDeleteShader(vertexShader);
@@ -217,7 +242,7 @@ int main()
 
 #pragma endregion
 
-
+    
 
 
     // Render Loop
@@ -231,8 +256,16 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Draw Triangle
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+        // Draw Rectangle.
+        glUseProgram(shaderProgram);
+        vao1.Bind();
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        vao2.Bind();
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        vao2.Unbind();
+        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
         glfwSwapBuffers(mainWindow);// Swaps the rendered, back buffer, with the front buffer and displays it to the specified window
