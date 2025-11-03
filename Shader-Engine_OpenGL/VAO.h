@@ -1,4 +1,7 @@
 #pragma once
+#ifndef VAO_H
+#define VAO_H
+
 
 #include "VBO.h"
 
@@ -13,3 +16,6 @@ public:
     void Bind();
     void Unbind();
 };
+
+
+#endif
