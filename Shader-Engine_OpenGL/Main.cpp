@@ -1,11 +1,17 @@
 #include <iostream>
 
 #include <glad/glad.h> 
-#include <GLFW/glfw3.h>
 #include "VAO.h"
 #include "Shader.h"
+#include "Texture.h"
 
+float currentMixAmmount = 0.2;
 
+float texCoords[] = {
+    0.0f, 0.0f,  // lower-left corner  
+    1.0f, 0.0f,  // lower-right corner
+    0.5f, 1.0f   // top-center corner
+};
 
 float colourTriangle[] = {
     // positions         // colors
@@ -14,6 +20,13 @@ float colourTriangle[] = {
      0.0f,  0.5f, 0.0f,  0.0f, 1.0f, 1.0f    // top 
 };
 
+float vertices[] = {
+    // positions          // colors           // texture coords
+     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+};
 
 //rectangle
 float rectangleVertices[] = {
@@ -61,6 +74,9 @@ void processInput(GLFWwindow* window)
     {
         glfwSetWindowShouldClose(window, true);
     }
+
+
+
 }
 
 
@@ -78,7 +94,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+    
 
     // Creates a window object, 
     // Checks that the window has been created succesfully,
@@ -100,10 +116,19 @@ int main()
         return -1;
     }
 
+
+#pragma region Enable Additional Settings
+
     // Sets the initial size for the OpenGL rendering window. 
     // Then registers the "framebuffer_size_callback" function to the GLFW window; for whenever it gets resized.
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     glfwSetFramebufferSizeCallback(mainWindow, framebuffer_size_callback);
+
+    // Allows for alpha transparency.
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+#pragma endregion
 
 #pragma endregion
 
@@ -111,7 +136,7 @@ int main()
     // Copies the vertex data to a buffer on the GPU.
 #pragma region Vertex Buffer Object
 
-    VBO vbo = VBO(colourTriangle, sizeof(colourTriangle));
+    VBO vbo = VBO(vertices, sizeof(vertices));
 
 #pragma endregion
 
@@ -128,6 +153,9 @@ int main()
     // Creates and binds the Element buffer which will in turn be tied into the VAO which is currently bound.
 #pragma region Element Buffer Object
 
+    // Bind vao so that the ebo can be linked into the vao for the next time it is called.
+    vao.Bind();
+
     // Create an Element buffer object
     unsigned int EBO;
     glGenBuffers(1, &EBO);
@@ -136,13 +164,31 @@ int main()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
+    vao.Unbind();
+
+#pragma endregion
+
+
+#pragma region Texture Object
+
+    Texture texture1 = Texture("container.jpg");
+    Texture texture2 = Texture("awesomeface.png", true);
+
+
 #pragma endregion
 
 
 
 
+    // Create a basic shader for rendering our objects
     Shader ourShader("VertexShader.vert", "FragmentShader.frag");
 
+    ourShader.useProgram();
+    ourShader.setInt("texture1", 0);
+    ourShader.setInt("texture2", 1);
+
+
+    
 
     // Render Loop
     while (!glfwWindowShouldClose(mainWindow))
@@ -151,20 +197,43 @@ int main()
         processInput(mainWindow);
 
 
+        if (glfwGetKey(mainWindow, GLFW_KEY_W) == GLFW_PRESS)
+        {
+            currentMixAmmount += 0.0001f; // change this value accordingly (might be too slow or too fast based on system hardware)
+            if (currentMixAmmount >= 1.0f)
+                currentMixAmmount = 1.0f;
+        }
+        else if (glfwGetKey(mainWindow, GLFW_KEY_S) == GLFW_PRESS)
+        {
+            currentMixAmmount -= 0.0001f; // change this value accordingly (might be too slow or too fast based on system hardware)
+            if (currentMixAmmount <= 0.0f)
+                currentMixAmmount = 0.0f;
+        }
+
+
+
+
         // Rendering Commands here...
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.22f, 0.45f, 0.22f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-
+        glActiveTexture(GL_TEXTURE0);
+        texture1.Bind();
+        glActiveTexture(GL_TEXTURE1);
+        texture2.Bind();
 
         ourShader.useProgram();
-        ourShader.setFloat("xOffset", -0.5);
+        ourShader.setFloat("xOffset", 0);
+        
+        ourShader.setFloat("mixAmount", currentMixAmmount);
+
         vao.Bind();
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        //glDrawArrays(GL_TRIANGLES, 0, 6);
+        // Draw Rectangle.
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         vao.Unbind();
 
-        // Draw Rectangle.
-        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        
 
 
         glfwSwapBuffers(mainWindow);// Swaps the rendered, back buffer, with the front buffer and displays it to the specified window
