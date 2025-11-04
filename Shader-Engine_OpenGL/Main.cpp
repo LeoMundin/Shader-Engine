@@ -86,6 +86,7 @@ void processInput(GLFWwindow* window)
 int main()
 {
 
+
     // Enables the correct libaries with the right settings and, creates a window for rendering.
 #pragma region Libary & Window Setup
 
@@ -136,7 +137,7 @@ int main()
     // Copies the vertex data to a buffer on the GPU.
 #pragma region Vertex Buffer Object
 
-    VBO vbo = VBO(vertices, sizeof(vertices));
+    VBO vbo= VBO(vertices, sizeof(vertices));
 
 #pragma endregion
 
@@ -165,6 +166,7 @@ int main()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     vao.Unbind();
+
 
 #pragma endregion
 
@@ -196,44 +198,41 @@ int main()
 
         processInput(mainWindow);
 
-
-        if (glfwGetKey(mainWindow, GLFW_KEY_W) == GLFW_PRESS)
-        {
-            currentMixAmmount += 0.0001f; // change this value accordingly (might be too slow or too fast based on system hardware)
-            if (currentMixAmmount >= 1.0f)
-                currentMixAmmount = 1.0f;
-        }
-        else if (glfwGetKey(mainWindow, GLFW_KEY_S) == GLFW_PRESS)
-        {
-            currentMixAmmount -= 0.0001f; // change this value accordingly (might be too slow or too fast based on system hardware)
-            if (currentMixAmmount <= 0.0f)
-                currentMixAmmount = 0.0f;
-        }
-
-
-
-
         // Rendering Commands here...
         glClearColor(0.22f, 0.45f, 0.22f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // Bind textures to the correct Texture Unit
         glActiveTexture(GL_TEXTURE0);
         texture1.Bind();
         glActiveTexture(GL_TEXTURE1);
         texture2.Bind();
 
-        ourShader.useProgram();
-        ourShader.setFloat("xOffset", 0);
-        
-        ourShader.setFloat("mixAmount", currentMixAmmount);
 
         vao.Bind();
-        //glDrawArrays(GL_TRIANGLES, 0, 6);
-        // Draw Rectangle.
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        vao.Unbind();
 
+        // First Object
         
+        // Calculates a slight scale and rotation of the object
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+        // Applies transform to object through a uniform on its shader.
+        ourShader.setMat4("transform", trans);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+        // Second Object
+        trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(-0.5f, 0.5f, 0.0f));
+        trans = glm::scale(trans, glm::vec3(0.5f, 0.5f, 0.5f));
+        trans = glm::rotate(trans, -(float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        
+        ourShader.setMat4("transform", trans);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        vao.Unbind();
 
 
         glfwSwapBuffers(mainWindow);// Swaps the rendered, back buffer, with the front buffer and displays it to the specified window
