@@ -7,16 +7,20 @@
       "RelativeMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Shader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|solutionrelative:Shader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\VertexShader.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|solutionrelative:VertexShader.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Shader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|solutionrelative:Shader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\VertexShader.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|solutionrelative:VertexShader.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\VAO.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|solutionrelative:VAO.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Shader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|solutionrelative:Shader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F0ADAE59-8EEB-45FE-A421-B919C647D3C9}|Shader-Engine_OpenGL.vcxproj|E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\FragmentShader.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -38,8 +42,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "VAO.cpp",
+              "DocumentMoniker": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\VAO.cpp",
+              "RelativeDocumentMoniker": "VAO.cpp",
+              "ToolTip": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\VAO.cpp",
+              "RelativeToolTip": "VAO.cpp",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-11-05T14:14:25.916Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -55,32 +72,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Shader.cpp",
               "DocumentMoniker": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Shader.cpp",
               "RelativeDocumentMoniker": "Shader.cpp",
               "ToolTip": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Shader.cpp",
               "RelativeToolTip": "Shader.cpp",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAH4AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-11-04T18:02:44.54Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Texture.cpp",
               "DocumentMoniker": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Texture.cpp",
               "RelativeDocumentMoniker": "Texture.cpp",
               "ToolTip": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Texture.cpp",
               "RelativeToolTip": "Texture.cpp",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAAEwAAABDAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAEwAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-11-04T11:21:27.832Z"
+              "WhenOpened": "2025-11-04T11:21:27.832Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Texture.h",
               "DocumentMoniker": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Texture.h",
               "RelativeDocumentMoniker": "Texture.h",
@@ -92,7 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "FragmentShader.frag",
               "DocumentMoniker": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\FragmentShader.frag",
               "RelativeDocumentMoniker": "FragmentShader.frag",
@@ -100,17 +118,18 @@
               "RelativeToolTip": "FragmentShader.frag",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-04T10:51:06.635Z"
+              "WhenOpened": "2025-11-04T10:51:06.635Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "VertexShader.vert",
               "DocumentMoniker": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\VertexShader.vert",
               "RelativeDocumentMoniker": "VertexShader.vert",
               "ToolTip": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\VertexShader.vert",
               "RelativeToolTip": "VertexShader.vert",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-11-04T10:49:52.263Z",
               "EditorCaption": ""
@@ -123,7 +142,7 @@
               "RelativeDocumentMoniker": "Main.cpp",
               "ToolTip": "E:\\Personal\\C\u002B\u002B\\Shader-Engine\\Shader-Engine_OpenGL\\Main.cpp",
               "RelativeToolTip": "Main.cpp",
-              "ViewState": "AgIAAM4AAAAAAAAAAAAcwNIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAOcAAAAAAAAAAAAAAOgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-02T15:38:21.888Z",
               "EditorCaption": ""
