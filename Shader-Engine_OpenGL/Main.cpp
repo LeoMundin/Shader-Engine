@@ -5,6 +5,7 @@
 #include "Shader.h"
 #include "Texture.h"
 
+// TODO : Turn Camera into class. It is made up of the part which creates the view matrix and, the parts which effect its local vectors.
 
 float vertices[] = {
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -58,8 +59,31 @@ unsigned int indices[] = {  // note that we start from 0!
 
 #pragma region Global Variables
 
+// System
+float currentFrameTime;
+float lastFrameTime;
+float deltaTime;
+
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
+
+
+// Camera
+glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
+glm::vec3 cameraForward = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
+
+// Camera Feature settings
+float cameraFOV = 60;
+float cameraPitch;
+float cameraYaw;
+
+
+// Input
+bool firstMouseInput;
+float mouseLastX = 400, mouseLastY = 300;
+
+
 
 #pragma endregion
 
@@ -77,6 +101,49 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
+// Handles camera movement
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) 
+{
+    if (firstMouseInput)
+    {
+        mouseLastX = xpos;
+        mouseLastY = ypos;
+        firstMouseInput = false;
+    }
+
+    float xoffset = xpos - mouseLastX;
+    float yoffset = mouseLastY - ypos;
+    mouseLastX = xpos;
+    mouseLastY = ypos;
+
+    float sensitivity = 0.1f;
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+
+    cameraYaw += xoffset;
+    cameraPitch += yoffset;
+
+    if (cameraPitch > 89.0f)
+        cameraPitch = 89.0f;
+    if (cameraPitch < -89.0f)
+        cameraPitch = -89.0f;
+
+    glm::vec3 direction;
+    direction.x = cos(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
+    direction.y = sin(glm::radians(cameraPitch));
+    direction.z = sin(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
+    cameraForward = glm::normalize(direction);
+}
+
+// Scroll movement
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    cameraFOV -= (float)yoffset;
+    if (cameraFOV < 1.0f)
+        cameraFOV = 1.0f;
+    if (cameraFOV > 45.0f)
+        cameraFOV = 45.0f;
+}
 
 /// <summary>
 /// Processes all of the relevant input events which occur within the given window.
@@ -90,7 +157,15 @@ void processInput(GLFWwindow* window)
         glfwSetWindowShouldClose(window, true);
     }
 
-
+    const float cameraSpeed = 2.5f * deltaTime; // adjust accordingly
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        cameraPos +=  cameraSpeed * cameraForward;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        cameraPos -=  cameraSpeed * cameraForward;
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        cameraPos -= glm::normalize(glm::cross(cameraForward, cameraUp)) *  cameraSpeed;
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        cameraPos += glm::normalize(glm::cross(cameraForward, cameraUp)) * cameraSpeed;
 
 }
 
@@ -139,6 +214,12 @@ int main()
     // Then registers the "framebuffer_size_callback" function to the GLFW window; for whenever it gets resized.
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     glfwSetFramebufferSizeCallback(mainWindow, framebuffer_size_callback);
+    
+    // Mouse input callback assignment. camera movement
+    glfwSetCursorPosCallback(mainWindow, mouse_callback);
+
+    // Scroll callback assignment. Zoom capabilities.
+    glfwSetScrollCallback(mainWindow, scroll_callback);
 
     // Enable Depth testing
     glEnable(GL_DEPTH_TEST);
@@ -146,6 +227,9 @@ int main()
     // Allows for alpha transparency.
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    // Hide and capture cursor.
+    glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 #pragma endregion
 
@@ -210,16 +294,16 @@ int main()
 
 
     glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f,  0.0f,  -2.0f),
-        glm::vec3(2.0f,  5.0f, -15.0f),
+        glm::vec3(0.0f,  0.0f,  0.0f),
+        glm::vec3(2.0f,  5.0f, 15.0f),
         glm::vec3(-1.5f, -2.2f, -2.5f),
         glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, -3.5f),
+        glm::vec3(2.4f, -0.4f, 3.5f),
         glm::vec3(-1.7f,  3.0f, -7.5f),
         glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f,  2.0f, -2.5f),
+        glm::vec3(1.5f,  2.0f, 2.5f),
         glm::vec3(1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
+        glm::vec3(-1.3f,  1.0f, 1.5f)
     };
 
 
@@ -230,28 +314,21 @@ int main()
 #pragma region Coordinate Space Transformations
 
 
-    // Model Matrix
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
-
-    // View Matrix
-    glm::mat4 view = glm::mat4(1.0f);
-    // note that we're translating the scene in the reverse direction of where we want to move
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-
-
-    // Projection Matrix
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
 
 #pragma endregion
 
+    // initial Frame Time
+    currentFrameTime = (float)glfwGetTime();
 
     // Render Loop
     while (!glfwWindowShouldClose(mainWindow))
     {
+        // Calculate Delta Time;
+        lastFrameTime = currentFrameTime;
+        currentFrameTime = (float)glfwGetTime();
+        deltaTime = currentFrameTime - lastFrameTime;
 
         processInput(mainWindow);
 
@@ -265,6 +342,14 @@ int main()
         glActiveTexture(GL_TEXTURE1);
         texture2.Bind();
 
+
+        // Projection Matrix
+        glm::mat4 projection;
+        projection = glm::perspective(glm::radians(cameraFOV), 800.0f / 600.0f, 0.1f, 100.0f);
+
+        // Camera View Matrix
+        glm::mat4 view;
+        view = glm::lookAt(cameraPos, cameraPos + cameraForward, cameraUp);
 
         vao.Bind();
 
@@ -281,9 +366,12 @@ int main()
             ourShader.setMat4("model", model);
             ourShader.setMat4("view", view);
             ourShader.setMat4("projection", projection);
+            
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
+
+        
 
         vao.Unbind();
 
