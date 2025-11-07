@@ -7,6 +7,50 @@
 
 // TODO : Turn Camera into class. It is made up of the part which creates the view matrix and, the parts which effect its local vectors.
 
+float lightVertices[] = {
+    -0.5f, -0.5f, -0.5f,
+     0.5f, -0.5f, -0.5f,
+     0.5f,  0.5f, -0.5f,
+     0.5f,  0.5f, -0.5f,
+    -0.5f,  0.5f, -0.5f,
+    -0.5f, -0.5f, -0.5f,
+
+    -0.5f, -0.5f,  0.5f,
+     0.5f, -0.5f,  0.5f,
+     0.5f,  0.5f,  0.5f,
+     0.5f,  0.5f,  0.5f,
+    -0.5f,  0.5f,  0.5f,
+    -0.5f, -0.5f,  0.5f,
+
+    -0.5f,  0.5f,  0.5f,
+    -0.5f,  0.5f, -0.5f,
+    -0.5f, -0.5f, -0.5f,
+    -0.5f, -0.5f, -0.5f,
+    -0.5f, -0.5f,  0.5f,
+    -0.5f,  0.5f,  0.5f,
+
+     0.5f,  0.5f,  0.5f,
+     0.5f,  0.5f, -0.5f,
+     0.5f, -0.5f, -0.5f,
+     0.5f, -0.5f, -0.5f,
+     0.5f, -0.5f,  0.5f,
+     0.5f,  0.5f,  0.5f,
+
+    -0.5f, -0.5f, -0.5f,
+     0.5f, -0.5f, -0.5f,
+     0.5f, -0.5f,  0.5f,
+     0.5f, -0.5f,  0.5f,
+    -0.5f, -0.5f,  0.5f,
+    -0.5f, -0.5f, -0.5f,
+
+    -0.5f,  0.5f, -0.5f,
+     0.5f,  0.5f, -0.5f,
+     0.5f,  0.5f,  0.5f,
+     0.5f,  0.5f,  0.5f,
+    -0.5f,  0.5f,  0.5f,
+    -0.5f,  0.5f, -0.5f
+};
+
 float vertices[] = {
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
      0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
@@ -64,8 +108,8 @@ float currentFrameTime;
 float lastFrameTime;
 float deltaTime;
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 1600;
+const int SCREEN_HEIGHT = 1200;
 
 
 // Camera
@@ -81,7 +125,7 @@ float cameraYaw;
 
 // Input
 bool firstMouseInput;
-float mouseLastX = 400, mouseLastY = 300;
+float mouseLastX = SCREEN_WIDTH/2 , mouseLastY = SCREEN_HEIGHT/2 ;
 
 
 
@@ -157,15 +201,26 @@ void processInput(GLFWwindow* window)
         glfwSetWindowShouldClose(window, true);
     }
 
-    const float cameraSpeed = 2.5f * deltaTime; // adjust accordingly
+
+    float cameraSpeed = 2.5f * deltaTime; // adjust accordingly
+    // BOOST SPEED
+    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        cameraSpeed += cameraSpeed * 2;
+    // FORWARDS/BACKWARDS
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         cameraPos +=  cameraSpeed * cameraForward;
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         cameraPos -=  cameraSpeed * cameraForward;
+    // STRAFE LEFT/RIGHT
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         cameraPos -= glm::normalize(glm::cross(cameraForward, cameraUp)) *  cameraSpeed;
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         cameraPos += glm::normalize(glm::cross(cameraForward, cameraUp)) * cameraSpeed;
+    // UP/DOWN
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        cameraPos += cameraSpeed * cameraUp;
+    if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+        cameraPos -= cameraSpeed * cameraUp;
 
 }
 
@@ -214,12 +269,17 @@ int main()
     // Then registers the "framebuffer_size_callback" function to the GLFW window; for whenever it gets resized.
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     glfwSetFramebufferSizeCallback(mainWindow, framebuffer_size_callback);
-    
+
+    // Hide and capture cursor.
+    glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
     // Mouse input callback assignment. camera movement
     glfwSetCursorPosCallback(mainWindow, mouse_callback);
 
     // Scroll callback assignment. Zoom capabilities.
     glfwSetScrollCallback(mainWindow, scroll_callback);
+
+
 
     // Enable Depth testing
     glEnable(GL_DEPTH_TEST);
@@ -228,8 +288,7 @@ int main()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // Hide and capture cursor.
-    glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 
 #pragma endregion
 
@@ -240,6 +299,8 @@ int main()
 #pragma region Vertex Buffer Object
 
     VBO vbo= VBO(vertices, sizeof(vertices));
+    VBO lightVBO= VBO(lightVertices, sizeof(lightVertices));
+
 
 #pragma endregion
 
@@ -250,6 +311,16 @@ int main()
 
     // Configure array attributes
     vao.LinkVBO(vbo);
+
+    unsigned int lightVAO;
+    glGenVertexArrays(1, &lightVAO);
+    glBindVertexArray(lightVAO);
+    // we only need to bind to the VBO, the container's VBO's data already contains the data.
+    lightVBO.Bind();
+    // set the vertex attribute 
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    lightVBO.Unbind();
 
 #pragma endregion
 
@@ -269,7 +340,6 @@ int main()
 
     //vao.Unbind();
 
-
 #pragma endregion
 
 
@@ -284,65 +354,53 @@ int main()
 
     // Create a basic shader for rendering our objects
     Shader ourShader("VertexShader.vert", "FragmentShader.frag");
+    // Create a shader for rendering light objects
+    Shader lightShader("VertexShader.vert", "LightFragmentShader.frag");
 
     ourShader.useProgram();
     ourShader.setInt("texture1", 0);
     ourShader.setInt("texture2", 1);
+    ourShader.setVec3("objectColor", 1.0f, 1.0f, 1.0f);
+    ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 
-
-
-
-
-    glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f,  0.0f,  0.0f),
-        glm::vec3(2.0f,  5.0f, 15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, 3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f,  2.0f, 2.5f),
-        glm::vec3(1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, 1.5f)
-    };
+    // Bind textures to the correct Texture Unit
+    glActiveTexture(GL_TEXTURE0);
+    texture1.Bind();
+    glActiveTexture(GL_TEXTURE1);
+    texture2.Bind();
 
 
 
 
 
 
-#pragma region Coordinate Space Transformations
 
-
-
-
-
-#pragma endregion
 
     // initial Frame Time
     currentFrameTime = (float)glfwGetTime();
-
     // Render Loop
     while (!glfwWindowShouldClose(mainWindow))
     {
+        // Rendering Commands here...
+        glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         // Calculate Delta Time;
         lastFrameTime = currentFrameTime;
         currentFrameTime = (float)glfwGetTime();
         deltaTime = currentFrameTime - lastFrameTime;
 
+
+        // Input Handling
         processInput(mainWindow);
-
-        // Rendering Commands here...
-        glClearColor(0.22f, 0.45f, 0.22f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // Bind textures to the correct Texture Unit
-        glActiveTexture(GL_TEXTURE0);
-        texture1.Bind();
-        glActiveTexture(GL_TEXTURE1);
-        texture2.Bind();
+        glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
 
 
+#pragma region Transform Matrices
+
+        // Model Matrix
+        glm::mat4 model = glm::mat4(1.0f);
+        
         // Projection Matrix
         glm::mat4 projection;
         projection = glm::perspective(glm::radians(cameraFOV), 800.0f / 600.0f, 0.1f, 100.0f);
@@ -351,33 +409,53 @@ int main()
         glm::mat4 view;
         view = glm::lookAt(cameraPos, cameraPos + cameraForward, cameraUp);
 
-        vao.Bind();
+#pragma endregion
 
-        for (unsigned int i = 0; i < 10; i++)
-        {
 
-            // create a new Model Matrix for each object, then Move and Rotate it.
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * i + 1;
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 
-            // Send Transform Matricies to Vertex Shader
-            ourShader.setMat4("model", model);
-            ourShader.setMat4("view", view);
-            ourShader.setMat4("projection", projection);
-            
+#pragma region Render Objects
 
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
 
         
 
+        // LIT OBJECT --------------------------------------------------
+        ourShader.useProgram();
+
+
+        vao.Bind();
+
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+
+        // send transform matricies to vertex shader
+        ourShader.setMat4("model", model);
+        ourShader.setMat4("view", view);
+        ourShader.setMat4("projection", projection);
+
+        glDrawArrays(GL_TRIANGLES, 0, 35);
         vao.Unbind();
 
+        // LIGHT OBJECT -------------------------------------------------
+        lightShader.useProgram();
+        glBindVertexArray(lightVAO);
 
-        glfwSwapBuffers(mainWindow);// Swaps the rendered, back buffer, with the front buffer and displays it to the specified window
-        glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
+        model = glm::translate(model, glm::vec3(1.2f, 1.0f, 2.0f));
+        model = glm::scale(model, glm::vec3(0.2f));
+
+        // send transform matricies to vertex shader
+        lightShader.setMat4("model", model);
+        lightShader.setMat4("view", view);
+        lightShader.setMat4("projection", projection);
+
+        glDrawArrays(GL_TRIANGLES, 0, 35);
+        glBindVertexArray(0);
+
+        
+
+
+#pragma endregion
+
+        // Swaps the rendered, back buffer, with the front buffer to display previous content.
+        glfwSwapBuffers(mainWindow);
 
     }
 
@@ -386,6 +464,7 @@ int main()
     glfwTerminate();
     return 0;
 }
+
 
 
 

@@ -58,5 +58,8 @@
     <None Include="FragmentShader.frag">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="LightFragmentShader.frag">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

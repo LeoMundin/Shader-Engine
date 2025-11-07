@@ -1,18 +1,22 @@
 #version 330 core
 out vec4 FragColor;
-
-in vec3 ourColor;
 in vec2 TexCoord;
 
-// Provides access to our texture
+uniform vec3 objectColor;
+uniform vec3 lightColor;
+
 uniform sampler2D texture1;
 uniform sampler2D texture2;
-
-uniform float mixAmount = 0.2;
+uniform float mixAmount = 0;
 
 void main()
 {
-    // Linearly interpolates between the two values based on the third parameter.
-    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), mixAmount);
-}
 
+    float ambientStrength = 0.2f;
+    vec3 ambientLight = ambientStrength * lightColor;
+    vec3 calculatedAmbient = ambientLight * objectColor;
+
+    vec4 lightTexture = vec4(calculatedAmbient, 1.0) * mix(texture(texture1, TexCoord), texture(texture2, TexCoord), mixAmount);
+
+    FragColor = lightTexture;
+}
