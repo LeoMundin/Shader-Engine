@@ -20,7 +20,8 @@ void main()
 
 
     TexCoord = aTexCoord;
-    Normal = aNormal;
+    // Helps transform the normal vectors properly when performing non-uniform scaling.
+    Normal = mat3(transpose(inverse(model))) * aNormal;  
     FragPos =  vec3(model * vec4(aPos, 1.0));
 
 }
