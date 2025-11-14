@@ -4,8 +4,7 @@
 #include "VAO.h"
 #include "Shader.h"
 #include "Texture.h"
-
-// TODO : Turn Camera into class. It is made up of the part which creates the view matrix and, the parts which effect its local vectors.
+#include "Camera.h"
 
 glm::vec3 lightPos = glm::vec3(1.0f, 3.0f, 1.0f);
 
@@ -120,123 +119,25 @@ float deltaTime;
 const int SCREEN_WIDTH = 1600;
 const int SCREEN_HEIGHT = 1200;
 
-
 // Camera
-glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
-glm::vec3 cameraForward = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
-
-// Camera Feature settings
-float cameraFOV = 60;
-float cameraPitch;
-float cameraYaw;
-
-
-// Input
-bool firstMouseInput;
-float mouseLastX = SCREEN_WIDTH/2 , mouseLastY = SCREEN_HEIGHT/2 ;
-
-
+float mouseLastX;
+float mouseLastY;
+glm::vec3 cameraPos   = glm::vec3(0.0f, 1.0f,  3.0f);
+Camera mainCamera = Camera(cameraPos, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 #pragma endregion
 
 
 //------------------------------------------- HELPER FUNCTIONS -------------------------------------------------------
+// Definitions at bottom.
 
-
-/// <summary>
-/// A function that is called every time the GLFW window is re-sized, and re-sizes the OpenGL window accordingly.
-/// </summary>
-/// <param name="width"> The new width for the Render Window. </param>
-/// <param name="height"> The new height for the Render Window. </param>
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-
-// Handles camera movement
-void mouse_callback(GLFWwindow* window, double xpos, double ypos) 
-{
-    if (firstMouseInput)
-    {
-        mouseLastX = xpos;
-        mouseLastY = ypos;
-        firstMouseInput = false;
-    }
-
-    float xoffset = xpos - mouseLastX;
-    float yoffset = mouseLastY - ypos;
-    mouseLastX = xpos;
-    mouseLastY = ypos;
-
-    float sensitivity = 0.1f;
-    xoffset *= sensitivity;
-    yoffset *= sensitivity;
-
-    cameraYaw += xoffset;
-    cameraPitch += yoffset;
-
-    if (cameraPitch > 89.0f)
-        cameraPitch = 89.0f;
-    if (cameraPitch < -89.0f)
-        cameraPitch = -89.0f;
-
-    glm::vec3 direction;
-    direction.x = cos(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
-    direction.y = sin(glm::radians(cameraPitch));
-    direction.z = sin(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
-    cameraForward = glm::normalize(direction);
-}
-
-// Scroll movement
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-    cameraFOV -= (float)yoffset;
-    if (cameraFOV < 1.0f)
-        cameraFOV = 1.0f;
-    if (cameraFOV > 45.0f)
-        cameraFOV = 45.0f;
-}
-
-/// <summary>
-/// Processes all of the relevant input events which occur within the given window.
-/// </summary>
-/// <param name="window"> The window from which to read the appropriate input events, </param>
-void processInput(GLFWwindow* window)
-{
-    // Close window
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) 
-    {
-        glfwSetWindowShouldClose(window, true);
-    }
-
-
-    float cameraSpeed = 2.5f * deltaTime; // adjust accordingly
-    // BOOST SPEED
-    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-        cameraSpeed += cameraSpeed * 2;
-    // FORWARDS/BACKWARDS
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        cameraPos +=  cameraSpeed * cameraForward;
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        cameraPos -=  cameraSpeed * cameraForward;
-    // STRAFE LEFT/RIGHT
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        cameraPos -= glm::normalize(glm::cross(cameraForward, cameraUp)) *  cameraSpeed;
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        cameraPos += glm::normalize(glm::cross(cameraForward, cameraUp)) * cameraSpeed;
-    // UP/DOWN
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-        cameraPos += cameraSpeed * cameraUp;
-    if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
-        cameraPos -= cameraSpeed * cameraUp;
-
-}
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void processInput(GLFWwindow* window);
 
 
 //------------------------------------------- ENGINE CODE -------------------------------------------------------
-
-
 int main()
 {
 
@@ -357,9 +258,7 @@ int main()
     Texture texture1 = Texture("container.jpg");
     Texture texture2 = Texture("awesomeface.png", true);
 
-
 #pragma endregion
-
 
     // Create a basic shader for rendering our objects
     Shader ourShader("VertexShader.vert", "FragmentShader.frag");
@@ -409,14 +308,14 @@ int main()
 
         // Model Matrix
         glm::mat4 model = glm::mat4(1.0f);
-        
+
         // Projection Matrix
         glm::mat4 projection;
-        projection = glm::perspective(glm::radians(cameraFOV), 800.0f / 600.0f, 0.1f, 100.0f);
+        projection = glm::perspective(glm::radians(mainCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
         // Camera View Matrix
         glm::mat4 view;
-        view = glm::lookAt(cameraPos, cameraPos + cameraForward, cameraUp);
+        view = mainCamera.GetCameraViewMatrix();
 
 #pragma endregion
 
@@ -429,7 +328,7 @@ int main()
         float lightX = sin(glfwGetTime()) * radius;
         float lightZ = cos(glfwGetTime()) * radius;
         lightPos = glm::vec3(lightX, lightPos.y, lightZ);
-        
+
 
         // LIT OBJECT --------------------------------------------------
         ourShader.useProgram();
@@ -465,7 +364,7 @@ int main()
 
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
-        
+
 
 
 #pragma endregion
@@ -473,13 +372,88 @@ int main()
         // Swaps the rendered, back buffer, with the front buffer to display previous content.
         glfwSwapBuffers(mainWindow);
 
-    }
-
+    };
 
     // Clean up all GLFW resources
     glfwTerminate();
     return 0;
+
 }
+
+
+
+/// <summary>
+/// A function that is called every time the GLFW window is re-sized, and re-sizes the OpenGL window accordingly.
+/// </summary>
+/// <param name="width"> The new width for the Render Window. </param>
+/// <param name="height"> The new height for the Render Window. </param>
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+
+
+// Handles camera movement
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+
+    float xoffset = xpos - mouseLastX;
+    float yoffset = mouseLastY - ypos;
+    mouseLastX = xpos;
+    mouseLastY = ypos;
+
+    mainCamera.Look(xoffset, yoffset, true);
+
+}
+
+
+
+// Scroll wheel callback
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    mainCamera.Zoom(yoffset);
+}
+
+
+
+/// <summary>
+/// Processes all of the relevant input events which occur within the given window.
+/// </summary>
+/// <param name="window"> The window from which to read the appropriate input events, </param>
+void processInput(GLFWwindow* window)
+{
+    // Close window
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, true);
+    }
+
+
+    // BOOST SPEED
+    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        mainCamera.Move(Camera::ECameraInput::SHIFT, deltaTime);
+
+    // FORWARDS/BACKWARDS
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        mainCamera.Move(Camera::ECameraInput::FORWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        mainCamera.Move(Camera::ECameraInput::BACKWARD, deltaTime);
+    // STRAFE LEFT/RIGHT
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        mainCamera.Move(Camera::ECameraInput::LEFT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        mainCamera.Move(Camera::ECameraInput::RIGHT, deltaTime);
+
+    // UP/DOWN
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        mainCamera.Move(Camera::ECameraInput::UP, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+        mainCamera.Move(Camera::ECameraInput::DOWN, deltaTime);
+
+}
+
+
 
 
 

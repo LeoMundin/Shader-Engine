@@ -1,10 +1,16 @@
 ﻿  Main.cpp
-E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(162,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(163,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(167,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(168,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(169,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(170,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(429,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(430,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Camera.h(66,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Main.cpp')
+  
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Camera.h(67,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Main.cpp')
+  
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(328,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(329,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(401,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(402,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(403,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(404,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(415,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Shader-Engine_OpenGL.vcxproj -> E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\x64\Debug\Shader-Engine_OpenGL.exe
