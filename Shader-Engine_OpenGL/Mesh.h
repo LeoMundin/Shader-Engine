@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include "VAO.h"
 #include "Shader.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -32,9 +33,9 @@ public:
     void Draw(Shader& shader);
 private:
     //  render data
-    unsigned int VAO, VBO, EBO;
+    unsigned int VAO, VBO, EBO; // TODO : Replace with class.ID
 
-    void SetUpMesh();
+    void SetUpMesh(); // TODO : Refactor to utelize classes not new versions.
 };
 
 #endif

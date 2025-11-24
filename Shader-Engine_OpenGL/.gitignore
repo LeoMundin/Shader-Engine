@@ -1,3 +1,6 @@
+# Folder paths
+/.vs
+
 # Prerequisites
 *.d
 
@@ -16,6 +19,7 @@
 
 # Debugger Files
 *.pdb
+
 
 # Compiled Dynamic libraries
 *.so
@@ -39,3 +43,4 @@
 
 # debug information files
 *.dwo
+*.idb
