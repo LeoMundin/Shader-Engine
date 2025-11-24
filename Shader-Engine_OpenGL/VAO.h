@@ -2,8 +2,9 @@
 #ifndef VAO_H
 #define VAO_H
 
-
 #include "VBO.h"
+#include "EBO.h"
+
 
 class VAO
 {
@@ -12,7 +13,8 @@ public:
     unsigned int ID;
     VAO();
 
-    void LinkVBO(VBO vbo);
+    void LinkVBOAttributes(VBO vbo);
+    void LinkEBO(EBO ebo);
     void Bind();
     void Unbind();
 };

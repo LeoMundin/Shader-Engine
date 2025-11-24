@@ -223,7 +223,7 @@ int main()
     VAO vao = VAO();
 
     // Configure array attributes
-    vao.LinkVBO(vbo);
+    vao.LinkVBOAttributes(vbo);
 
     unsigned int lightVAO;
     glGenVertexArrays(1, &lightVAO);
