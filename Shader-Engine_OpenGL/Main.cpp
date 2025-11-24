@@ -1,5 +1,8 @@
 #include <iostream>
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 #include <glad/glad.h> 
 #include "VAO.h"
 #include "Shader.h"
