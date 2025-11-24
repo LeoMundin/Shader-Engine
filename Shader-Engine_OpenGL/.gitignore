@@ -1,5 +1,5 @@
 # Folder paths
-/.vs
+*/.vs
 
 # Prerequisites
 *.d
