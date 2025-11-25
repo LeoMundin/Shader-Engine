@@ -1,116 +1,14 @@
 ﻿  Main.cpp
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27): error C2039: 'Vertex': is not a member of 'Mesh'
-  (compiling source file 'Main.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Mesh.h(24,7):
-      see declaration of 'Mesh'
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Source\Camera.h(66,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source/Main.cpp')
   
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27): error C2275: 'Vertex': expected an expression instead of a type
-  (compiling source file 'Main.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27):
-      prefix the qualified-id with 'typename' to indicate a type
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Source\Camera.h(67,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Source/Main.cpp')
   
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,14): error C2923: 'std::vector': 'Vertex' is not a valid template type argument for parameter '_Ty'
-  (compiling source file 'Main.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Mesh.h(13,8):
-      see declaration of 'Vertex'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,14): error C2976: 'std::vector': too few template arguments
-  (compiling source file 'Main.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(429,7):
-      see declaration of 'std::vector'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Camera.h(66,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  (compiling source file 'Main.cpp')
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Camera.h(67,18): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  (compiling source file 'Main.cpp')
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(286,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(287,22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(359,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(360,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(361,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(362,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Main.cpp(373,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Mesh.cpp
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,21): error C2653: 'Mesh': is not a class or namespace name
-  (compiling source file 'Mesh.cpp')
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27): error C2065: 'Vertex': undeclared identifier
-  (compiling source file 'Mesh.cpp')
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,14): error C2923: 'std::vector': 'Vertex' is not a valid template type argument for parameter '_Ty'
-  (compiling source file 'Mesh.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27):
-      see declaration of 'Vertex'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,14): error C2976: 'std::vector': too few template arguments
-  (compiling source file 'Mesh.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(429,7):
-      see declaration of 'std::vector'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,21): error C2065: 'Mesh': undeclared identifier
-  (compiling source file 'Mesh.cpp')
-  
-  VAO.cpp
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27): error C2039: 'Vertex': is not a member of 'Mesh'
-  (compiling source file 'VAO.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Mesh.h(24,7):
-      see declaration of 'Mesh'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27): error C2275: 'Vertex': expected an expression instead of a type
-  (compiling source file 'VAO.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27):
-      prefix the qualified-id with 'typename' to indicate a type
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,14): error C2923: 'std::vector': 'Vertex' is not a valid template type argument for parameter '_Ty'
-  (compiling source file 'VAO.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Mesh.h(13,8):
-      see declaration of 'Vertex'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,14): error C2976: 'std::vector': too few template arguments
-  (compiling source file 'VAO.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(429,7):
-      see declaration of 'std::vector'
-  
-  VBO.cpp
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VAO.h(17,28): error C2061: syntax error: identifier 'VBO'
-  (compiling source file 'VBO.cpp')
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27): error C2039: 'Vertex': is not a member of 'Mesh'
-  (compiling source file 'VBO.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Mesh.h(24,7):
-      see declaration of 'Mesh'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27): error C2275: 'Vertex': expected an expression instead of a type
-  (compiling source file 'VBO.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,27):
-      prefix the qualified-id with 'typename' to indicate a type
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,14): error C2923: 'std::vector': 'Vertex' is not a valid template type argument for parameter '_Ty'
-  (compiling source file 'VBO.cpp')
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Mesh.h(13,8):
-      see declaration of 'Vertex'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(18,14): error C2976: 'std::vector': too few template arguments
-  (compiling source file 'VBO.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(429,7):
-      see declaration of 'std::vector'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.cpp(3,6): error C2511: 'VBO::VBO(std::vector<Vertex,std::allocator<Vertex>>)': overloaded member function not found in 'VBO'
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(11,7):
-      see declaration of 'VBO'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.cpp(7,22): error C2597: illegal reference to non-static member 'VBO::ID'
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(15,18):
-      see declaration of 'VBO::ID'
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.cpp(7,21): error C2664: 'void (GLsizei,GLuint *)': cannot convert argument 2 from 'unsigned int VBO::* ' to 'GLuint *'
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.cpp(7,21):
-      There is no context in which this conversion is possible
-  
-C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.cpp(8,5): error C2352: 'VBO::Bind': a call of a non-static member function requires an object
-      C:\Users\leomu\Documents\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\VBO.h(20,10):
-      see declaration of 'VBO::Bind'
-  
-  Generating Code...
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Source\Main.cpp(414,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Source\Main.cpp(415,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Source\Main.cpp(416,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Source\Main.cpp(417,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\Source\Main.cpp(428,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Shader-Engine_OpenGL.vcxproj -> E:\Personal\C++\Shader-Engine\Shader-Engine_OpenGL\x64\Debug\Shader-Engine_OpenGL.exe
