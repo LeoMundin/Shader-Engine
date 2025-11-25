@@ -209,7 +209,7 @@ int main()
 
 #pragma endregion
 
-    const char* path = "Assets/Models/stanford-bunny/source/stanford-bunny.fbx";
+    const char* path = "Assets/Models/backpack/backpack.obj";
     Model backpack(path);
 
     // Copies the vertex data to a buffer on the GPU.
@@ -268,25 +268,9 @@ int main()
 #pragma endregion
 
     // Create a basic shader for rendering our objects
-    Shader ourShader("Assets/Shaders/VertexShader.vert", "Assets/Shaders/FragmentShader.frag");
+    Shader ourShader("Assets/Shaders/ObjectLoading.vert", "Assets/Shaders/ObjectLoading.frag");
     // Create a shader for rendering light objects
     Shader lightShader("Assets/Shaders/VertexShader.vert", "Assets/Shaders/LightFragmentShader.frag");
-
-    ourShader.useProgram();
-    ourShader.setInt("texture1", 0);
-    ourShader.setInt("texture2", 1);
-    ourShader.setVec3("objectColor", 1.0f, 1.0f, 1.0f);
-    ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-
-    // Bind textures to the correct Texture Unit
-    glActiveTexture(GL_TEXTURE0);
-    texture1.Bind();
-    glActiveTexture(GL_TEXTURE1);
-    texture2.Bind();
-
-
-
-
 
 
 
@@ -325,10 +309,11 @@ int main()
         view = mainCamera.GetCameraViewMatrix();
 
 #pragma endregion
+        ourShader.useProgram();
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        model = glm::scale(model, glm::vec3(1));	// it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         ourShader.setMat4("view", view);
         ourShader.setMat4("projection", projection);
@@ -338,14 +323,13 @@ int main()
 #pragma region Render Objects
 
 
-        //const float radius = 8.0f;
-        //float lightX = sin(glfwGetTime()) * radius;
-        //float lightZ = cos(glfwGetTime()) * radius;
-        //lightPos = glm::vec3(lightX, lightPos.y, lightZ);
+        const float radius = 8.0f;
+        float lightX = sin(glfwGetTime()) * radius;
+        float lightZ = cos(glfwGetTime()) * radius;
+        lightPos = glm::vec3(lightX, lightPos.y, lightZ);
 
 
-        //// LIT OBJECT --------------------------------------------------
-        //ourShader.useProgram();
+        // LIT OBJECT --------------------------------------------------
 
 
         //vao.Bind();
@@ -363,20 +347,20 @@ int main()
 
 
 
-        //// LIGHT OBJECT -------------------------------------------------
-        //lightShader.useProgram();
-        //glBindVertexArray(lightVAO);
+        // LIGHT OBJECT -------------------------------------------------
+        lightShader.useProgram();
+        glBindVertexArray(lightVAO);
 
-        //model = glm::translate(model, lightPos);
-        //model = glm::scale(model, glm::vec3(0.2f));
+        model = glm::translate(model, lightPos);
+        model = glm::scale(model, glm::vec3(0.2f));
 
-        //// send transform matricies to vertex shader
-        //lightShader.setMat4("model", model);
-        //lightShader.setMat4("view", view);
-        //lightShader.setMat4("projection", projection);
+        // send transform matricies to vertex shader
+        lightShader.setMat4("model", model);
+        lightShader.setMat4("view", view);
+        lightShader.setMat4("projection", projection);
 
-        //glDrawArrays(GL_TRIANGLES, 0, 36);
-        //glBindVertexArray(0);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(0);
 
 
 

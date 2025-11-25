@@ -42,6 +42,12 @@
     <ClCompile Include="Source\VBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="External\Include\glad\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera.h">
@@ -65,15 +71,24 @@
     <ClInclude Include="Source\VBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Source\FragmentShader.frag">
+    <None Include="Assets\Shaders\FragmentShader.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Source\LightFragmentShader.frag">
+    <None Include="Assets\Shaders\LightFragmentShader.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Source\VertexShader.vert">
+    <None Include="Assets\Shaders\ObjectLoading.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ObjectLoading.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\VertexShader.vert">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

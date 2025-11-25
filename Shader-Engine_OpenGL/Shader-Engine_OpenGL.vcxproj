@@ -151,9 +151,11 @@
     <ClInclude Include="Source\VBO.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Source\FragmentShader.frag" />
-    <None Include="Source\LightFragmentShader.frag" />
-    <None Include="Source\VertexShader.vert" />
+    <None Include="Assets\Shaders\FragmentShader.frag" />
+    <None Include="Assets\Shaders\LightFragmentShader.frag" />
+    <None Include="Assets\Shaders\ObjectLoading.frag" />
+    <None Include="Assets\Shaders\ObjectLoading.vert" />
+    <None Include="Assets\Shaders\VertexShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

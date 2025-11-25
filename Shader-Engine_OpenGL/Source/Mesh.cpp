@@ -6,7 +6,8 @@ Mesh::Mesh(std ::vector<Vert> vertices, std::vector<unsigned int> indices, std::
     this->indices = indices;
     this->textures = textures;
 
-    //setupMesh();
+    SetUpMesh(); // This has to run, otherwise nothing loads. Note : DO NOT TOUCH!!
+
 }
 
 void Mesh::SetUpMesh()
@@ -53,7 +54,7 @@ void Mesh::Draw(Shader& shader){
 
         // Update the shader uniform for this texture, given the values above
         // NOTE : The addition of "material." is dependant on whether textures are passed to structs in the shader
-        shader.setInt(("material." + textureType + textureIndex).c_str(), i); 
+        shader.setInt((textureType + textureIndex).c_str(), i); 
 
 
 
@@ -62,7 +63,6 @@ void Mesh::Draw(Shader& shader){
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
     glActiveTexture(GL_TEXTURE0);
-
 
     // draw mesh 
     // TODO : Abstract

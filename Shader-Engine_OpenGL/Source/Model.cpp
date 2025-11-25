@@ -8,7 +8,12 @@ void Model::Draw(Shader& shader){
 
 void Model::loadModel(std::string path){
     Assimp::Importer import;
-    const aiScene * scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+    const aiScene * scene = import.ReadFile(path,
+        aiProcess_Triangulate |
+        aiProcess_FlipUVs |
+        aiProcess_GenSmoothNormals |
+        aiProcess_CalcTangentSpace |
+        aiProcess_JoinIdenticalVertices);
 
     // Error Checking
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -55,7 +60,9 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene){
         vector.y = mesh->mVertices[i].y;
         vector.z = mesh->mVertices[i].z;
         vertex.Position = vector;
-            
+
+
+
         // Process Vertex Normals Coordinates :
         vector.x = mesh->mNormals[i].x;
         vector.y = mesh->mNormals[i].y;
@@ -99,7 +106,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene){
         std::vector<Tex> specularMaps = loadMaterialTextures(material,aiTextureType_SPECULAR, "texture_specular");
         textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
     }
-
+   
     // return a mesh object created from the extracted mesh data
     return Mesh(vertices, indices, textures);
 }
@@ -149,6 +156,7 @@ unsigned int Model::TextureFromFile(const char* path, const std::string& directo
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
+    stbi_set_flip_vertically_on_load(true); // Important option 
     unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
     if (data)
     {

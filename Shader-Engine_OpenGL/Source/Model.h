@@ -3,9 +3,9 @@
 #define MODEL_H
 
 #include "Mesh.h"
-#include <Importer.hpp>
-#include <scene.h>
-#include <postprocess.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 #include "stb_image.h" // Image loading capabilites
 
 
