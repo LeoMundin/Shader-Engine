@@ -268,7 +268,7 @@ int main()
 #pragma endregion
 
     // Create a basic shader for rendering our objects
-    Shader ourShader("Assets/Shaders/ObjectLoading.vert", "Assets/Shaders/ObjectLoading.frag");
+    Shader ourShader("Assets/Shaders/VertexShader.vert", "Assets/Shaders/FragmentShader.frag");
     // Create a shader for rendering light objects
     Shader lightShader("Assets/Shaders/VertexShader.vert", "Assets/Shaders/LightFragmentShader.frag");
 
@@ -294,11 +294,9 @@ int main()
         processInput(mainWindow);
         glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
 
-        //backpack.Draw(ourShader);
+
 
 #pragma region Transform Matrices
-
-
 
         //// Projection Matrix
         glm::mat4 projection;
@@ -308,21 +306,14 @@ int main()
         glm::mat4 view;
         view = mainCamera.GetCameraViewMatrix();
 
-#pragma endregion
-        ourShader.useProgram();
-
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1));	// it's a bit too big for our scene, so scale it down
-        ourShader.setMat4("model", model);
-        ourShader.setMat4("view", view);
-        ourShader.setMat4("projection", projection);
-        backpack.Draw(ourShader);
+
+#pragma endregion
 
 
 #pragma region Render Objects
 
-
+        // Move Light
         const float radius = 8.0f;
         float lightX = sin(glfwGetTime()) * radius;
         float lightZ = cos(glfwGetTime()) * radius;
@@ -330,20 +321,20 @@ int main()
 
 
         // LIT OBJECT --------------------------------------------------
+        ourShader.useProgram();
 
+        // Transform
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(1));	// it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", model);
+        ourShader.setMat4("view", view);
+        ourShader.setMat4("projection", projection);
 
-        //vao.Bind();
+        // Lighting
+        ourShader.setVec3("viewPos", cameraPos.x, cameraPos.y, cameraPos.z);
+        ourShader.setVec3("lightPos", lightPos.x, lightPos.y, lightPos.z);
 
-        //model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-        //ourShader.setVec3("viewPos", cameraPos.x, cameraPos.y, cameraPos.z);
-        //ourShader.setVec3("lightPos", lightPos.x, lightPos.y, lightPos.z);
-
-        //// send transform matricies to vertex shader
-        //ourShader.setMat4("model", model);
-
-
-        //glDrawArrays(GL_TRIANGLES, 0, 36);
-        //vao.Unbind();
+        backpack.Draw(ourShader);
 
 
 
@@ -351,10 +342,9 @@ int main()
         lightShader.useProgram();
         glBindVertexArray(lightVAO);
 
+        // Transform
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f));
-
-        // send transform matricies to vertex shader
         lightShader.setMat4("model", model);
         lightShader.setMat4("view", view);
         lightShader.setMat4("projection", projection);

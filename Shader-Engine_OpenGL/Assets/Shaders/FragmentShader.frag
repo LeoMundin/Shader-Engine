@@ -6,17 +6,37 @@ in vec3 Normal;
 in vec3 FragPos;  
 uniform vec3 viewPos;
 uniform vec3 lightPos;  
-uniform vec3 objectColor;
-uniform vec3 lightColor;
+uniform vec3 objectColor =  vec3(1.0f, 1.0f, 1.0f);
+uniform vec3 lightColor = vec3( 1.0f, 0.9f, 0.9f);
 
 // Texture
-in vec2 TexCoord;
-uniform sampler2D texture1;
-uniform sampler2D texture2;
-uniform float mixAmount = 0;
+in vec2 TexCoords;
+uniform sampler2D texture_diffuse1;
+uniform sampler2D texture_diffuse2;
+uniform sampler2D texture_specular1;
+uniform sampler2D texture_specular2;
+
+// Helper Methods
+vec3 CalculateLighting();
 
 
 void main()
+{
+
+
+    vec3 calculatedLight = CalculateLighting();
+
+    vec4 litTexture = vec4(calculatedLight, 1.0) *  texture(texture_diffuse1, TexCoords);
+
+    FragColor = litTexture  ;
+
+}
+
+
+
+// Calculates phong lighting, 
+// returning the combined lighting effect as vec3.
+vec3 CalculateLighting()
 {
 
     vec3 vertexNormal = normalize(Normal);
@@ -40,9 +60,7 @@ void main()
 
 
 
-    vec3 calculatedLight = (ambientLight + diffuseLight + specularLight) * objectColor;
+    vec3 light = (ambientLight + diffuseLight + specularLight) * objectColor;
 
-    vec4 litTexture = vec4(calculatedLight, 1.0) * mix(texture(texture1, TexCoord), texture(texture2, TexCoord), mixAmount);
-    FragColor = litTexture;
-
+    return light;
 }
