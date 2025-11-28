@@ -38,7 +38,7 @@ public:
     float yaw = -90; // Rotation around y
 
 
-
+    Camera(){};
     Camera(glm::vec3 pos, const int SCREEN_WIDTH, const int SCREEN_HEIGHT)
     {
 
