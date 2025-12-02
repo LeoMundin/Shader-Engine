@@ -83,7 +83,7 @@
     <ClInclude Include="Source\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TransfromComponent.h">
+    <ClInclude Include="Source\TransformComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\RenderComponent.h">

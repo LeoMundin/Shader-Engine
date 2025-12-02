@@ -1,6 +1,10 @@
 #include "TuftEngine.h"
 
 
+
+
+//bag->addComponent<RenderComponent>(this, transform, backpack, ourShader);
+
 // Backpack
 const char* backpackPath = "Assets/Models/backpack/backpack.obj";
 Model backpack(backpackPath);
@@ -20,7 +24,9 @@ glm::mat4 lightModel = glm::mat4(1.0f);
 
 void TuftEngine::OnUpdate()
 {
-
+   
+    std::cout << glm::to_string(transform->Position);
+    transform->Position += glm::vec3(1);
     // Move Light
     const float radius = 8.0f;
     float lightX = sin(glfwGetTime()) * radius;

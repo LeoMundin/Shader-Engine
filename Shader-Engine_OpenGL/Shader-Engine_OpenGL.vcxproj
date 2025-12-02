@@ -151,7 +151,7 @@
     <ClInclude Include="Source\RenderComponent.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\Texture.h" />
-    <ClInclude Include="Source\TransfromComponent.h" />
+    <ClInclude Include="Source\TransformComponent.h" />
     <ClInclude Include="Source\TuftEngine.h" />
     <ClInclude Include="Source\VAO.h" />
     <ClInclude Include="Source\VBO.h" />

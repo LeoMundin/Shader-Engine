@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
+
 
 #include "Component.h"
 
@@ -18,6 +20,9 @@ public:
 		_components.emplace_back(component);
 		return component.get();
 	}
+
+
+	// TO DO : implement a get component function
 
 	void Update() {
 		for (auto& component : _components) {

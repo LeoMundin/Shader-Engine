@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+#include "glm/ext.hpp" // Provides gl::to_string function!
 #include <Importer.hpp>
 #include <scene.h>
 #include <postprocess.h>
@@ -14,7 +15,9 @@
 #include "Texture.h"
 #include "Camera.h"
 #include "Entity.h"
-#include "TransfromComponent.h"
+#include "TransformComponent.h"
+//#include "RenderComponent.h"
+
 
 
 class TuftEngine {
@@ -38,7 +41,7 @@ class TuftEngine {
         // Input
         float mouseLastX;
         float mouseLastY;
-
+        TransformComponent* transform;
 
         // Constructor
         TuftEngine() {};
@@ -62,9 +65,14 @@ class TuftEngine {
         void StartEngine() {
             _currentFrameTime = (float)glfwGetTime();
 
-
+            const char* backpackPath = "Assets/Models/backpack/backpack.obj";
+            Model backpack(backpackPath);
+            Shader ourShader("Assets/Shaders/VertexShader.vert", "Assets/Shaders/FragmentShader.frag");
             bag = new Entity();
-            auto* transform = bag->addComponent<TransformComponent>(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1));
+            transform = bag->addComponent<TransformComponent>(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1));
+
+            //bag->addComponent<RenderComponent>(this, transform, backpack, ourShader);
+
 
 
             while (!glfwWindowShouldClose(MainWindow)) {
