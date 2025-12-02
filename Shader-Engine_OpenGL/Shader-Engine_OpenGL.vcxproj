@@ -143,11 +143,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\EBO.h" />
+    <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\RenderComponent.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\Texture.h" />
+    <ClInclude Include="Source\TransfromComponent.h" />
     <ClInclude Include="Source\TuftEngine.h" />
     <ClInclude Include="Source\VAO.h" />
     <ClInclude Include="Source\VBO.h" />

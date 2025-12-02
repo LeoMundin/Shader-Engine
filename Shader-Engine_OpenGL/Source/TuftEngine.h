@@ -13,11 +13,15 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "Entity.h"
+#include "TransfromComponent.h"
 
 
 class TuftEngine {
 
     public:
+
+        Entity* bag = nullptr;
 
         // System
         float DeltaTime;
@@ -57,6 +61,12 @@ class TuftEngine {
         /// </summary>
         void StartEngine() {
             _currentFrameTime = (float)glfwGetTime();
+
+
+            bag = new Entity();
+            auto* transform = bag->addComponent<TransformComponent>(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1));
+
+
             while (!glfwWindowShouldClose(MainWindow)) {
                 _currentFrameTime = (float)glfwGetTime();
                 DeltaTime = _currentFrameTime - _lastFrameTime;
@@ -104,6 +114,10 @@ class TuftEngine {
         static void OnMouseInput(GLFWwindow* window, double xpos, double ypos){}
         static void OnScroll(GLFWwindow* window, double xoffset, double yoffset){}
         static void processInput(GLFWwindow* window) {};
+
+
+        glm::mat4 GetProjectionMatrix() { return _projectionMatrix; };
+        glm::mat4 GetViewMatrix() { return _viewMatrix; };
 
 
     private:
