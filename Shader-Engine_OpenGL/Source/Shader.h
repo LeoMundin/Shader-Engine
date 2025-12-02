@@ -21,10 +21,12 @@ public:
     unsigned int ID;
 
     // constructor reads and builds the shader
+    Shader() {};
     Shader(const char* vertexPath, const char* fragmentPath);
 
     // use/activate the shader
     void useProgram();
+    void StopProgram();
 
     // utility uniform functions
     void setBool(const std::string& name, bool value) const;

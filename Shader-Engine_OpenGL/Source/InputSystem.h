@@ -1,0 +1,41 @@
+#pragma once
+#ifndef INPUTSYSTEM_H
+#define INPUTSYSTEM_H
+
+#include <iostream>
+
+#include "glm/ext.hpp" // Provides glm::to_string function!
+#include <glfw3.h>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
+
+
+class InputSystem 
+{
+public:
+
+	static glm::vec2 LookOffset;
+    static glm::vec2 MovementInput;
+
+	InputSystem(){};
+	InputSystem(GLFWwindow* window) 
+	{
+
+		std::cout << "Input System Initalized";
+
+        glfwSetKeyCallback(window, OnKeyCallback);
+		glfwSetCursorPosCallback(window, OnMousePosCallback); // Mouse Position : Camera movement
+	}
+
+private:
+
+	static glm::vec2 _lastMousePos;
+
+    static void OnKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	static void OnMousePosCallback(GLFWwindow* window, double xpos, double ypos);
+
+};
+
+#endif
+

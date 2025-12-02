@@ -131,23 +131,33 @@
   <ItemGroup>
     <ClCompile Include="External\Include\glad\glad.c" />
     <ClCompile Include="Source\EBO.cpp" />
+    <ClCompile Include="Source\ElderHex.cpp" />
+    <ClCompile Include="Source\InputSystem.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\Model.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\StbImageImplementation.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
-    <ClCompile Include="Source\TuftEngine.cpp" />
     <ClCompile Include="Source\VAO.cpp" />
     <ClCompile Include="Source\VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\FPSCharacterController.h" />
+    <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\EBO.h" />
+    <ClInclude Include="Source\ElderHex.h" />
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\GameObject.h" />
+    <ClInclude Include="Source\InputSystem.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\RenderComponent.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\Texture.h" />
+    <ClInclude Include="Source\TransformComponent.h" />
     <ClInclude Include="Source\TuftEngine.h" />
     <ClInclude Include="Source\VAO.h" />
     <ClInclude Include="Source\VBO.h" />

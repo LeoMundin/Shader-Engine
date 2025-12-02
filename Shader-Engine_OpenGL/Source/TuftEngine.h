@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+#include "glm/ext.hpp" // Provides glm::to_string function!
 #include <Importer.hpp>
 #include <scene.h>
 #include <postprocess.h>
@@ -13,6 +14,10 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "Entity.h"
+#include "TransformComponent.h"
+#include "RenderComponent.h"
+#include "InputSystem.h"
 
 
 class TuftEngine {
@@ -23,18 +28,19 @@ class TuftEngine {
         float DeltaTime;
 
         // Screen
-        GLFWwindow* MainWindow;
+        GLFWwindow *MainWindow = nullptr;
         unsigned int ScreenWidth;
         unsigned int ScreenHeight;
 
         // Camera
-        Camera MainCamera;
+        Camera MainCamera; // TO:Do Turn into entity
         glm::vec3 CameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
+        glm::vec3 lightPos = glm::vec3(1.0f, 3.0f, 1.0f);
 
         // Input
-        float mouseLastX;
-        float mouseLastY;
+        InputSystem Input;
 
+        
 
         // Constructor
         TuftEngine() {};
@@ -44,77 +50,45 @@ class TuftEngine {
             ScreenWidth = width;
             ScreenHeight = height;
             MainCamera = Camera(CameraPos, ScreenWidth, ScreenHeight);
-            mouseLastX = ScreenWidth / 2;
-            mouseLastY = ScreenHeight / 2;
-
 
             InitialiseGLFW();
             InitialiseGlad();
 
         }
+
+
         /// <summary>
         /// Starts the Game Engine loop initiating lifecycle hooks.
         /// </summary>
-        void StartEngine() {
+        void init() {
             _currentFrameTime = (float)glfwGetTime();
+
+            Awake();
+
             while (!glfwWindowShouldClose(MainWindow)) {
                 _currentFrameTime = (float)glfwGetTime();
                 DeltaTime = _currentFrameTime - _lastFrameTime;
+
                 ProcessInput();
                 Update();
                 Render();
+
                 _lastFrameTime = _currentFrameTime;
             };
             glfwTerminate();
-        }
 
-
-
-        // External Lifecycle Methods
-        void ProcessInput() { 
-            OnProcessInput(MainWindow); 
-            glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
-        }
-        void Update() { 
-            _projectionMatrix = glm::perspective(glm::radians(MainCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
-            _viewMatrix = MainCamera.GetCameraViewMatrix();
-
-            OnUpdate(); 
-        }
-        void Render() {
-            glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            OnRender(); 
-            
-            glfwSwapBuffers(MainWindow);// Swaps the rendered, back buffer, with the front buffer to display rendered content.
         }
 
 
         // CALLBACK METHODS - NEED UPDATING FOR NEW SYSTEM
-        /// <summary>
-        /// A function that is called every time the GLFW window is re-sized, and re-sizes the OpenGL window accordingly.
-        /// </summary>
-        /// <param name="width"> The new width for the Render Window. </param>
-        /// <param name="height"> The new height for the Render Window. </param>
         static void OnWindowResize(GLFWwindow* window, int width, int height)
         {
             glViewport(0, 0, width, height);
         }
-        static void OnMouseInput(GLFWwindow* window, double xpos, double ypos){}
-        static void OnScroll(GLFWwindow* window, double xoffset, double yoffset){}
-        static void processInput(GLFWwindow* window) {};
+
 
 
     private:
-
-        // Transformation Matricies
-        glm::mat4 _projectionMatrix;
-        glm::mat4 _viewMatrix;
-
-        // Delta Time
-        float _currentFrameTime;
-        float _lastFrameTime;
 
         void InitialiseGLFW() {
                 // GLFW Libary settings
@@ -147,15 +121,38 @@ class TuftEngine {
 
                 DefineGLADSettings();
 
-            }
+        }
+
+        // External Lifecycle Methods
+        void ProcessInput() {
+            glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
+        }
+        void Awake(){
+            OnAwake();
+        }
+        void Update() {
+            OnUpdate();
+        }
+        void Render() {
+            glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            OnRender();
+
+            glfwSwapBuffers(MainWindow);// Swaps the rendered, back buffer, with the front buffer to display rendered content.
+        }
 
 
     protected:
+        
+        // Delta Time
+        float _currentFrameTime;
+        float _lastFrameTime;
 
         virtual void SetGLFWCallbacks(GLFWwindow* window) {
                     glfwSetFramebufferSizeCallback(window, OnWindowResize);
-                    glfwSetCursorPosCallback(window, OnMouseInput); // Mouse Position : Camera movement
-                    glfwSetScrollCallback(window, OnScroll); // Scroll : Zoom.
+                    Input = InputSystem(MainWindow);
+
         }
         virtual void DefineGLADSettings() {
 
@@ -164,12 +161,12 @@ class TuftEngine {
                     // Allows for alpha transparency.
                     glEnable(GL_BLEND);
                     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                }
+        }
 
         // Internal Lifecycle methods
-        virtual void OnProcessInput(GLFWwindow* window){}
-        virtual void OnUpdate();
-        virtual void OnRender();
+        virtual void OnAwake() {};
+        virtual void OnUpdate() {};
+        virtual void OnRender() {};
 
 };
 

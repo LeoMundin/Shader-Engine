@@ -43,7 +43,7 @@ public:
     {
 
         position = pos;
-
+       
         up = glm::vec3(0,1,0);
         UpdateCameraForwards();
 
@@ -77,35 +77,6 @@ public:
         UpdateCameraForwards();
 
     }
-
-
-    void Move(ECameraInput input, float deltaTime) {
-
-
-        float cameraSpeed = 2.5f * deltaTime; // adjust accordingly
-        // BOOST SPEED
-        if (input == SHIFT)
-            cameraSpeed += cameraSpeed * 2;
-
-        // FORWARDS/BACKWARDS
-        if (input == FORWARD)
-            position += cameraSpeed * forward;
-        if (input == BACKWARD)
-            position -= cameraSpeed * forward;
-        // STRAFE LEFT/RIGHT
-        if (input == LEFT)
-            position -= right * cameraSpeed;
-        if (input == RIGHT)
-            position += right * cameraSpeed;
-
-        // UP/DOWN
-        if (input == UP)
-            position += cameraSpeed * up;
-        if (input == DOWN)
-            position -= cameraSpeed * up;
-    }
-
-
     void Zoom(float yoffset)
     {
         fov -= (float)yoffset;
@@ -119,9 +90,7 @@ public:
 
 private:
 
-    void UpdateCameraForwards() 
-    {
-
+    void UpdateCameraForwards(){
         // Calculate new forward
         glm::vec3 direction;
         direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -132,9 +101,7 @@ private:
         forward = glm::normalize(direction);
         right = glm::normalize(glm::cross(forward, up));
 
-
     }
-
 
 };
 
