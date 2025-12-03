@@ -142,6 +142,7 @@
     <ClCompile Include="Source\VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HexenDemake.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\EBO.h" />

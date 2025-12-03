@@ -2,7 +2,6 @@
 #ifndef RENDERCOMPONENT_H
 #define RENDERCOMPONENT_H
 
-#include "TuftEngine.h"
 #include "Component.h"
 #include "TransformComponent.h"
 #include "Model.h"
@@ -15,9 +14,10 @@ class RenderComponent : public Component
 {
 
 private:
-	TuftEngine _engine ;
+
 	Camera _renderCam;
 	TransformComponent _transfrom;
+	glm::vec3 *_lightPos;
 
 	Model _model;
 	Shader _shader;
@@ -32,9 +32,9 @@ private:
 public: 
 
 
-	RenderComponent(TuftEngine engine,Camera renderCam, TransformComponent transformComponent, Model model, Shader shader) 
+	RenderComponent(glm::vec3 *lightPos,Camera renderCam, TransformComponent transformComponent, Model model, Shader shader) 
 	{
-		_engine = engine;
+		_lightPos = lightPos;
 		_renderCam = renderCam;
 		_transfrom = transformComponent;
 		_model = model;
@@ -42,14 +42,23 @@ public:
 
 	}
 
+
+
 	void Render() override {
+
+
 		_modelMatrix = _transfrom.GetTransfromMatrix();
-		_viewMatrix = _engine.GetViewMatrix();
-		_projectionMatrix = _engine.GetProjectionMatrix();
+		_viewMatrix = _renderCam.GetCameraViewMatrix();
+		_projectionMatrix = glm::perspective(glm::radians(_renderCam.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
 		_shader.setMat4("model", _modelMatrix);
 		_shader.setMat4("view", _viewMatrix);
 		_shader.setMat4("projection", _projectionMatrix);
+
+		// Implement lighting
+		glm::vec3 camPos = _renderCam.position;
+		_shader.setVec3("viewPos", camPos.x,camPos.y,camPos.z);
+		_shader.setVec3("lightPos", _lightPos->x, _lightPos->y,_lightPos->z);
 
 		_model.Draw(_shader);
 

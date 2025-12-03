@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "glm/ext.hpp" // Provides gl::to_string function!
+#include "glm/ext.hpp" // Provides glm::to_string function!
 #include <Importer.hpp>
 #include <scene.h>
 #include <postprocess.h>
@@ -16,7 +16,7 @@
 #include "Camera.h"
 #include "Entity.h"
 #include "TransformComponent.h"
-//#include "RenderComponent.h"
+#include "RenderComponent.h"
 
 
 
@@ -35,13 +35,14 @@ class TuftEngine {
         unsigned int ScreenHeight;
 
         // Camera
-        Camera MainCamera;
+        Camera MainCamera; // TO:DoTurn into objects
         glm::vec3 CameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
+        glm::vec3 lightPos = glm::vec3(1.0f, 3.0f, 1.0f);
 
         // Input
         float mouseLastX;
         float mouseLastY;
-        TransformComponent* transform;
+        
 
         // Constructor
         TuftEngine() {};
@@ -69,9 +70,8 @@ class TuftEngine {
             Model backpack(backpackPath);
             Shader ourShader("Assets/Shaders/VertexShader.vert", "Assets/Shaders/FragmentShader.frag");
             bag = new Entity();
-            transform = bag->addComponent<TransformComponent>(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1));
-
-            //bag->addComponent<RenderComponent>(this, transform, backpack, ourShader);
+            auto* transform = bag->addComponent<TransformComponent>(glm::vec3(2, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1));
+            bag->addComponent<RenderComponent>(&lightPos,MainCamera, *transform, backpack, ourShader);
 
 
 

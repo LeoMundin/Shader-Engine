@@ -106,28 +106,44 @@ void Shader::useProgram()
 {
     glUseProgram(ID);
 }
+void Shader::StopProgram()
+{
+    glUseProgram(0);
+}
 
 #pragma region Uniform setters.
 
 void Shader::setBool(const std::string& name, bool value) const
 {
+    glUseProgram(ID);
     glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+    glUseProgram(0);
 }
 void Shader::setInt(const std::string& name, int value) const
 {
+    glUseProgram(ID);
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+    glUseProgram(0);
 }
 void Shader::setFloat(const std::string& name, float value) const
 {
+    glUseProgram(ID);
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+    glUseProgram(0);
 }
 void Shader :: setVec3(const std::string& name, float x, float y, float z) const
 {
+    glUseProgram(ID);
     glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z);
+    glUseProgram(0);
 }
+
+
 void Shader :: setMat4(const std::string& name, const glm::mat4& mat) const
 {
+    glUseProgram(ID);
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+    glUseProgram(0);
 }
 
 #pragma endregion

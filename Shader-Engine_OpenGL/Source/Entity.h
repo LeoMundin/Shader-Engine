@@ -13,6 +13,7 @@ class Entity
 {
 public:
 
+	// TODO - Implement hash table to store components with ID for easy look up.
 
 	template <typename T, typename ... TArgs>
 	T* addComponent(TArgs&&... args) {

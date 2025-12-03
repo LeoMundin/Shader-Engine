@@ -43,7 +43,7 @@ public:
     {
 
         position = pos;
-
+       
         up = glm::vec3(0,1,0);
         UpdateCameraForwards();
 
