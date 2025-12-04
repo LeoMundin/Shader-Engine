@@ -131,22 +131,23 @@
   <ItemGroup>
     <ClCompile Include="External\Include\glad\glad.c" />
     <ClCompile Include="Source\EBO.cpp" />
+    <ClCompile Include="Source\ElderHex.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\Model.cpp" />
     <ClCompile Include="Source\Shader.cpp" />
     <ClCompile Include="Source\StbImageImplementation.cpp" />
     <ClCompile Include="Source\Texture.cpp" />
-    <ClCompile Include="Source\TuftEngine.cpp" />
     <ClCompile Include="Source\VAO.cpp" />
     <ClCompile Include="Source\VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HexenDemake.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\EBO.h" />
+    <ClInclude Include="Source\ElderHex.h" />
     <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\RenderComponent.h" />

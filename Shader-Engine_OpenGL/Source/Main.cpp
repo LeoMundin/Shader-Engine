@@ -1,16 +1,15 @@
-#include "TuftEngine.h"
+#include "ElderHex.h"
 
 const int SCREEN_WIDTH = 1600;
 const int SCREEN_HEIGHT = 1200;
-TuftEngine engine = TuftEngine(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+ElderHex game(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 int main(){
-    engine.StartEngine();
+    game.StartEngine();
     return 0;
 
 }
-
-
 
 
 
@@ -18,12 +17,12 @@ int main(){
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
 
-    float xoffset = xpos - engine.mouseLastX;
-    float yoffset = engine.mouseLastY - ypos;
-    engine.mouseLastX = xpos;
-    engine.mouseLastY = ypos;
+    float xoffset = xpos - game.mouseLastX;
+    float yoffset = game.mouseLastY - ypos;
+    game.mouseLastX = xpos;
+    game.mouseLastY = ypos;
 
-    engine.MainCamera.Look(xoffset, yoffset, true);
+    game.MainCamera.Look(xoffset, yoffset, true);
 
 }
 
@@ -32,7 +31,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 // Scroll wheel callback
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    engine.MainCamera.Zoom(yoffset);
+    game.MainCamera.Zoom(yoffset);
 }
 
 
@@ -52,24 +51,24 @@ void processInput(GLFWwindow* window)
 
     // BOOST SPEED
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-        engine.MainCamera.Move(Camera::ECameraInput::SHIFT, engine.DeltaTime);
+        game.MainCamera.Move(Camera::ECameraInput::SHIFT, game.DeltaTime);
 
     // FORWARDS/BACKWARDS
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        engine.MainCamera.Move(Camera::ECameraInput::FORWARD, engine.DeltaTime);
+        game.MainCamera.Move(Camera::ECameraInput::FORWARD, game.DeltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        engine.MainCamera.Move(Camera::ECameraInput::BACKWARD, engine.DeltaTime);
+        game.MainCamera.Move(Camera::ECameraInput::BACKWARD, game.DeltaTime);
     // STRAFE LEFT/RIGHT
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        engine.MainCamera.Move(Camera::ECameraInput::LEFT, engine.DeltaTime);
+        game.MainCamera.Move(Camera::ECameraInput::LEFT, game.DeltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        engine.MainCamera.Move(Camera::ECameraInput::RIGHT, engine.DeltaTime);
+        game.MainCamera.Move(Camera::ECameraInput::RIGHT, game.DeltaTime);
 
     // UP/DOWN
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-        engine.MainCamera.Move(Camera::ECameraInput::UP, engine.DeltaTime);
+        game.MainCamera.Move(Camera::ECameraInput::UP, game.DeltaTime);
     if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
-        engine.MainCamera.Move(Camera::ECameraInput::DOWN, engine.DeltaTime);
+        game.MainCamera.Move(Camera::ECameraInput::DOWN, game.DeltaTime);
 
 }
 

@@ -48,7 +48,7 @@
     <ClCompile Include="Source\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TuftEngine.cpp">
+    <ClCompile Include="Source\ElderHex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,7 +92,10 @@
     <ClInclude Include="Source\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HexenDemake.h">
+    <ClInclude Include="Source\ElderHex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -42,7 +42,6 @@ public:
 	
 
 
-
 private:
 	glm::mat4 _transformMatrix;
 
