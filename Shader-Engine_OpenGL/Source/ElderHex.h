@@ -4,6 +4,8 @@
 
 #include "TuftEngine.h"
 #include "GameObject.h"
+#include "Player.h"
+#include "FPSCharacterController.h"
 
 class ElderHex : public TuftEngine 
 {
@@ -12,8 +14,8 @@ public:
 	ElderHex(unsigned int width, unsigned int height) :TuftEngine(width, height) {}; // Constructor
 
 	// Scene Assets
+	Player player = Player(&MainCamera);
 	GameObject bag;
-
 
 protected:
 

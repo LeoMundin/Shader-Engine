@@ -25,9 +25,9 @@ public:
 
 	// TO DO : implement a get component function
 
-	void Update() {
+	void Update(float deltaTime) {
 		for (auto& component : _components) {
-			component->Update();
+			component->Update(deltaTime);
 		}
 	};
 	

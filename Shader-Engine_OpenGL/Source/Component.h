@@ -9,7 +9,7 @@ public:
 	virtual ~Component() {}; // Destructor
 
 	// Lifecycle hooks
-	virtual void Update() {};
+	virtual void Update(float deltaTime) {};
 	virtual void Render() {};
 
 };

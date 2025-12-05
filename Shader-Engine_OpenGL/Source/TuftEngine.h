@@ -17,7 +17,7 @@
 #include "Entity.h"
 #include "TransformComponent.h"
 #include "RenderComponent.h"
-
+#include "InputSystem.h"
 
 
 class TuftEngine {
@@ -28,18 +28,18 @@ class TuftEngine {
         float DeltaTime;
 
         // Screen
-        GLFWwindow* MainWindow;
+        GLFWwindow *MainWindow = nullptr;
         unsigned int ScreenWidth;
         unsigned int ScreenHeight;
 
         // Camera
-        Camera MainCamera; // TO:DoTurn into objects
+        Camera MainCamera; // TO:Do Turn into entity
         glm::vec3 CameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
         glm::vec3 lightPos = glm::vec3(1.0f, 3.0f, 1.0f);
 
         // Input
-        float mouseLastX;
-        float mouseLastY;
+        InputSystem Input;
+
         
 
         // Constructor
@@ -50,19 +50,17 @@ class TuftEngine {
             ScreenWidth = width;
             ScreenHeight = height;
             MainCamera = Camera(CameraPos, ScreenWidth, ScreenHeight);
-            mouseLastX = ScreenWidth / 2;
-            mouseLastY = ScreenHeight / 2;
-
 
             InitialiseGLFW();
             InitialiseGlad();
 
         }
 
+
         /// <summary>
         /// Starts the Game Engine loop initiating lifecycle hooks.
         /// </summary>
-        void StartEngine() {
+        void init() {
             _currentFrameTime = (float)glfwGetTime();
 
             Awake();
@@ -82,21 +80,11 @@ class TuftEngine {
         }
 
 
-
-        // External Lifecycle Methods
-        void ProcessInput() { 
-            OnProcessInput(MainWindow); 
-            glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
-        }
-
         // CALLBACK METHODS - NEED UPDATING FOR NEW SYSTEM
         static void OnWindowResize(GLFWwindow* window, int width, int height)
         {
             glViewport(0, 0, width, height);
         }
-        static void OnMouseInput(GLFWwindow* window, double xpos, double ypos){}
-        static void OnScroll(GLFWwindow* window, double xoffset, double yoffset){}
-        static void processInput(GLFWwindow* window) {};
 
 
 
@@ -135,7 +123,10 @@ class TuftEngine {
 
         }
 
-
+        // External Lifecycle Methods
+        void ProcessInput() {
+            glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
+        }
         void Awake(){
             OnAwake();
         }
@@ -160,8 +151,8 @@ class TuftEngine {
 
         virtual void SetGLFWCallbacks(GLFWwindow* window) {
                     glfwSetFramebufferSizeCallback(window, OnWindowResize);
-                    glfwSetCursorPosCallback(window, OnMouseInput); // Mouse Position : Camera movement
-                    glfwSetScrollCallback(window, OnScroll); // Scroll : Zoom.
+                    Input = InputSystem(MainWindow);
+
         }
         virtual void DefineGLADSettings() {
 
@@ -173,7 +164,6 @@ class TuftEngine {
         }
 
         // Internal Lifecycle methods
-        virtual void OnProcessInput(GLFWwindow* window){}
         virtual void OnAwake() {};
         virtual void OnUpdate() {};
         virtual void OnRender() {};

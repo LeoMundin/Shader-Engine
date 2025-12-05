@@ -36,7 +36,7 @@ public:
 		return _transformMatrix;
 	}
 
-	void Update() override {
+	void Update(float deltaTime) override {
 		UpdateTransfromMatrix();
 	}
 	
