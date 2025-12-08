@@ -2,21 +2,29 @@
 #ifndef TUFTENGINE_H
 #define TUFTENGINE_H
 
+// EXTERNAL
 #include <iostream>
-
 #include "glm/ext.hpp" // Provides glm::to_string function!
 #include <Importer.hpp>
 #include <scene.h>
 #include <postprocess.h>
 #include <glad.h> 
+#include "reactphysics3d/reactphysics3d.h"
+
+// INTERNAL
 #include "VAO.h"
 #include "Model.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "Camera.h"
+
 #include "Entity.h"
 #include "TransformComponent.h"
 #include "RenderComponent.h"
+#include "RigidbodyComponent.h"
+#include "ColliderComponent.h"
+#include "CameraComponent.h"
+
 #include "InputSystem.h"
 
 
@@ -32,9 +40,15 @@ class TuftEngine {
         unsigned int ScreenWidth;
         unsigned int ScreenHeight;
 
+        // Physics
+        const float GRAVITY = -0.98f;
+        rp3d::PhysicsCommon PhysicsCommon;
+        rp3d::PhysicsWorld* PhysicsWorld;
+
+
         // Camera
         Camera MainCamera; // TO:Do Turn into entity
-        glm::vec3 CameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
+        glm::vec3 CameraPos = glm::vec3(0.0f, 5.0f, 10.0f);
         glm::vec3 lightPos = glm::vec3(1.0f, 3.0f, 1.0f);
 
         // Input
@@ -49,10 +63,17 @@ class TuftEngine {
 
             ScreenWidth = width;
             ScreenHeight = height;
-            MainCamera = Camera(CameraPos, ScreenWidth, ScreenHeight);
+            MainCamera = Camera(CameraPos);
 
             InitialiseGLFW();
             InitialiseGlad();
+
+            // Create Physics world with appropriate settings.
+            settings.defaultVelocitySolverNbIterations = 20;
+            settings.isSleepingEnabled = false;
+            settings.gravity = rp3d::Vector3(0, GRAVITY, 0);
+            PhysicsWorld = PhysicsCommon.createPhysicsWorld(settings);
+
 
         }
 
@@ -89,6 +110,8 @@ class TuftEngine {
 
 
     private:
+        // Physics world settings object
+        rp3d::PhysicsWorld::WorldSettings settings;
 
         void InitialiseGLFW() {
                 // GLFW Libary settings
@@ -132,6 +155,7 @@ class TuftEngine {
         }
         void Update() {
             OnUpdate();
+            PhysicsWorld->update(DeltaTime);
         }
         void Render() {
             glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
