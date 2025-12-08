@@ -102,13 +102,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\External\Include\KHR;$(SolutionDir)\External\Include\stbi;$(SolutionDir)\External\Include\glm;$(SolutionDir)\External\Include\GLFW;$(SolutionDir)\External\Include\assimp;$(SolutionDir)\External\Include\glad;$(SolutionDir)\External\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\External\Include\reactphysics3d;$(SolutionDir)\External\Include\KHR;$(SolutionDir)\External\Include\stbi;$(SolutionDir)\External\Include\glm;$(SolutionDir)\External\Include\GLFW;$(SolutionDir)\External\Include\assimp;$(SolutionDir)\External\Include\glad;$(SolutionDir)\External\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\External\Lib\assimp;$(SolutionDir)\External\Lib\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\External\Lib\reactphysics3d_DEBUG;$(SolutionDir)\External\Lib\assimp;$(SolutionDir)\External\Lib\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>reactphysics3d.lib;assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,13 +119,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\External\Include\KHR;$(SolutionDir)\External\Include\stbi;$(SolutionDir)\External\Include\glm;$(SolutionDir)\External\Include\GLFW;$(SolutionDir)\External\Include\assimp;$(SolutionDir)\External\Include\glad;$(SolutionDir)\External\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\External\Include\reactphysics3d;$(SolutionDir)\External\Include\KHR;$(SolutionDir)\External\Include\stbi;$(SolutionDir)\External\Include\glm;$(SolutionDir)\External\Include\GLFW;$(SolutionDir)\External\Include\assimp;$(SolutionDir)\External\Include\glad;$(SolutionDir)\External\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\External\Lib\assimp;$(SolutionDir)\External\Lib\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\External\Lib\reactphysics3d;$(SolutionDir)\External\Lib\assimp;$(SolutionDir)\External\Lib\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>reactphysics3d.lib;assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
