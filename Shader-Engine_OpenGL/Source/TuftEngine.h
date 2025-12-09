@@ -20,6 +20,7 @@
 #include "Entity.h"
 #include "TransformComponent.h"
 #include "RenderComponent.h"
+#include "RigidbodyComponent.h"
 #include "InputSystem.h"
 
 
@@ -65,8 +66,8 @@ class TuftEngine {
             // Create Physics world with appropriate settings.
             settings.defaultVelocitySolverNbIterations = 20;
             settings.isSleepingEnabled = false;
-            settings.gravity = rp3d::Vector3(0, -9.81, 0);
-            PhysicsWorld = PhysicsCommon.createPhysicsWorld();
+            settings.gravity = rp3d::Vector3(0, -0.2, 0);
+            PhysicsWorld = PhysicsCommon.createPhysicsWorld(settings);
 
 
         }
