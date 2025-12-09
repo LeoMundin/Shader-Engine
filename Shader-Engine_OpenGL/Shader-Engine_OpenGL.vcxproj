@@ -155,6 +155,7 @@
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\RenderComponent.h" />
+    <ClInclude Include="Source\RigidbodyComponent.h" />
     <ClInclude Include="Source\Shader.h" />
     <ClInclude Include="Source\Texture.h" />
     <ClInclude Include="Source\TransformComponent.h" />

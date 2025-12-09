@@ -7,7 +7,7 @@ void ElderHex::OnAwake() {
     Model backpack(backpackPath);
     Shader ourShader("Assets/Shaders/VertexShader.vert", "Assets/Shaders/FragmentShader.frag");
     bag.addComponent<RenderComponent>(&lightPos, &MainCamera, bag.Transform, backpack, ourShader);
-
+    
 }
 
 void ElderHex::OnUpdate() {

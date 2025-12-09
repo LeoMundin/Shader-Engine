@@ -2,13 +2,16 @@
 #ifndef TUFTENGINE_H
 #define TUFTENGINE_H
 
+// EXTERNAL
 #include <iostream>
-
 #include "glm/ext.hpp" // Provides glm::to_string function!
 #include <Importer.hpp>
 #include <scene.h>
 #include <postprocess.h>
 #include <glad.h> 
+#include "reactphysics3d/reactphysics3d.h"
+
+// INTERNAL
 #include "VAO.h"
 #include "Model.h"
 #include "Shader.h"
@@ -32,6 +35,11 @@ class TuftEngine {
         unsigned int ScreenWidth;
         unsigned int ScreenHeight;
 
+        // Physics
+        rp3d::PhysicsCommon PhysicsCommon;
+        rp3d::PhysicsWorld* PhysicsWorld;
+
+
         // Camera
         Camera MainCamera; // TO:Do Turn into entity
         glm::vec3 CameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
@@ -53,6 +61,13 @@ class TuftEngine {
 
             InitialiseGLFW();
             InitialiseGlad();
+
+            // Create Physics world with appropriate settings.
+            settings.defaultVelocitySolverNbIterations = 20;
+            settings.isSleepingEnabled = false;
+            settings.gravity = rp3d::Vector3(0, -9.81, 0);
+            PhysicsWorld = PhysicsCommon.createPhysicsWorld();
+
 
         }
 
@@ -89,6 +104,8 @@ class TuftEngine {
 
 
     private:
+        // Physics world settings object
+        rp3d::PhysicsWorld::WorldSettings settings;
 
         void InitialiseGLFW() {
                 // GLFW Libary settings
@@ -132,6 +149,7 @@ class TuftEngine {
         }
         void Update() {
             OnUpdate();
+            PhysicsWorld->update(DeltaTime);
         }
         void Render() {
             glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
