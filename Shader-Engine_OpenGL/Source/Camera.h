@@ -26,10 +26,10 @@ public:
 
 
     // Camera Transform
-    glm::vec3 position;
-    glm::vec3 forward = glm::vec3(0, 0, -1);
-    glm::vec3 up;
-    glm::vec3 right;
+    glm::vec3 Position;
+    glm::vec3 Forward = glm::vec3(0, 0, -1);
+    glm::vec3 Up = glm::vec3(0, 1, 0);
+    glm::vec3 Right;
 
     // Camera settings
     float fov = 60;
@@ -39,12 +39,9 @@ public:
 
 
     Camera(){};
-    Camera(glm::vec3 pos, const int SCREEN_WIDTH, const int SCREEN_HEIGHT)
+    Camera(glm::vec3 pos)
     {
-
-        position = pos;
-       
-        up = glm::vec3(0,1,0);
+        Position = pos;
         UpdateCameraForwards();
 
 	}
@@ -52,7 +49,7 @@ public:
 
     glm::mat4 GetCameraViewMatrix()
     {
-        return glm::lookAt(position, position + forward, up);
+        return glm::lookAt(Position, Position + Forward, Up);
     }
 
 
@@ -98,8 +95,8 @@ private:
         direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
         // Update transform values
-        forward = glm::normalize(direction);
-        right = glm::normalize(glm::cross(forward, up));
+        Forward = glm::normalize(direction);
+        Right = glm::normalize(glm::cross(Forward, Up));
 
     }
 

@@ -9,14 +9,15 @@ class Player : public GameObject
 {
 public:
 
-	Player(Camera *camera) 
+	Player(Camera *camera)
 	{
-		_characterController = addComponent<FPSCharacterController>(camera);
+		_characterController = addComponent<FPSCharacterController>(camera,Transform);
 	};
 
 private:
 
 	FPSCharacterController* _characterController;
+
 
 };
 

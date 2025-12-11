@@ -17,10 +17,14 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Camera.h"
+
 #include "Entity.h"
 #include "TransformComponent.h"
 #include "RenderComponent.h"
 #include "RigidbodyComponent.h"
+#include "ColliderComponent.h"
+#include "CameraComponent.h"
+
 #include "InputSystem.h"
 
 
@@ -37,13 +41,14 @@ class TuftEngine {
         unsigned int ScreenHeight;
 
         // Physics
+        const float GRAVITY = -0.98f;
         rp3d::PhysicsCommon PhysicsCommon;
         rp3d::PhysicsWorld* PhysicsWorld;
 
 
         // Camera
         Camera MainCamera; // TO:Do Turn into entity
-        glm::vec3 CameraPos = glm::vec3(0.0f, 1.0f, 7.0f);
+        glm::vec3 CameraPos = glm::vec3(0.0f, 5.0f, 10.0f);
         glm::vec3 lightPos = glm::vec3(1.0f, 3.0f, 1.0f);
 
         // Input
@@ -58,7 +63,7 @@ class TuftEngine {
 
             ScreenWidth = width;
             ScreenHeight = height;
-            MainCamera = Camera(CameraPos, ScreenWidth, ScreenHeight);
+            MainCamera = Camera(CameraPos);
 
             InitialiseGLFW();
             InitialiseGlad();
@@ -66,7 +71,7 @@ class TuftEngine {
             // Create Physics world with appropriate settings.
             settings.defaultVelocitySolverNbIterations = 20;
             settings.isSleepingEnabled = false;
-            settings.gravity = rp3d::Vector3(0, -0.2, 0);
+            settings.gravity = rp3d::Vector3(0, GRAVITY, 0);
             PhysicsWorld = PhysicsCommon.createPhysicsWorld(settings);
 
 

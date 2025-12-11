@@ -144,6 +144,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\CameraComponent.h" />
+    <ClInclude Include="Source\ColliderComponent.h" />
     <ClInclude Include="Source\FPSCharacterController.h" />
     <ClInclude Include="Source\Component.h" />
     <ClInclude Include="Source\EBO.h" />

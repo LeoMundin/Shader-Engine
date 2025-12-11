@@ -14,14 +14,17 @@ class FPSCharacterController : public Component
 {
 public:
 
-	float MovementSpeed = 2.5f;
+	float MovementSpeed = 10.0f;
 
-	FPSCharacterController(Camera* renderCam) 
+	FPSCharacterController(Camera* renderCam,TransformComponent *transform) 
 	{
 		_camera = renderCam;
+		_transform = transform;
 	};
 
 	void Update(float deltaTime) override {
+		_camera->Position = _transform->Position;
+
 		CameraLook();
 		HorizontalMovement(deltaTime);
 	}
@@ -34,14 +37,16 @@ public:
 	}
 	void HorizontalMovement(float deltaTime) {
 		
-		_camera->position += InputSystem::MovementInput.y * deltaTime * _camera->forward * MovementSpeed;
-		_camera->position += InputSystem::MovementInput.x * deltaTime * _camera->right * MovementSpeed;
+		// T0-Do : Convert to physics application
+		_camera->Position += InputSystem::MovementInput.y * deltaTime * _camera->Forward * MovementSpeed;
+		_camera->Position += InputSystem::MovementInput.x * deltaTime * _camera->Right * MovementSpeed;
 	}
 
 
 private:
 
 	Camera* _camera;
+	TransformComponent* _transform;
 
 };
 

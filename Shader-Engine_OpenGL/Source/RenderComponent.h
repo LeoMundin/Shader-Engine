@@ -38,7 +38,7 @@ public:
 		_shader.setMat4("projection", _projectionMatrix);
 
 		// Implement lighting
-		glm::vec3 camPos = _renderCam->position;
+		glm::vec3 camPos = _renderCam->Position;
 		_shader.setVec3("viewPos", camPos.x,camPos.y,camPos.z);
 		_shader.setVec3("lightPos", _lightPos->x, _lightPos->y,_lightPos->z);
 
