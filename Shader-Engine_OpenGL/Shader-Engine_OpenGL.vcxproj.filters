@@ -56,67 +56,70 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Camera.h">
+    <ClInclude Include="Source\Header\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EBO.h">
+    <ClInclude Include="Source\Header\EBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mesh.h">
+    <ClInclude Include="Source\Header\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Model.h">
+    <ClInclude Include="Source\Header\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Shader.h">
+    <ClInclude Include="Source\Header\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\VAO.h">
+    <ClInclude Include="Source\Header\VAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\VBO.h">
+    <ClInclude Include="Source\Header\VBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Texture.h">
+    <ClInclude Include="Source\Header\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TuftEngine.h">
+    <ClInclude Include="Source\Header\TuftEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Component.h">
+    <ClInclude Include="Source\Header\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TransformComponent.h">
+    <ClInclude Include="Source\Header\TransformComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RenderComponent.h">
+    <ClInclude Include="Source\Header\RenderComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entity.h">
+    <ClInclude Include="Source\Header\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ElderHex.h">
+    <ClInclude Include="Source\Header\ElderHex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
+    <ClInclude Include="Source\Header\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\InputSystem.h">
+    <ClInclude Include="Source\Header\InputSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\FPSCharacterController.h">
+    <ClInclude Include="Source\Header\FPSCharacterController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Player.h">
+    <ClInclude Include="Source\Header\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RigidbodyComponent.h">
+    <ClInclude Include="Source\Header\RigidbodyComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ColliderComponent.h">
+    <ClInclude Include="Source\Header\ColliderComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CameraComponent.h">
+    <ClInclude Include="Source\Header\CameraComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Header\HealthComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

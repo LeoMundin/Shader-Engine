@@ -17,14 +17,16 @@ public:
 
 	static glm::vec2 LookOffset;
     static glm::vec2 MovementInput;
+	static bool LeftMousePressed;
 
 	InputSystem(){};
 	InputSystem(GLFWwindow* window) 
 	{
 
-		std::cout << "Input System Initalized";
+		std::cout << "Input System Initalized " << std::endl;
 
         glfwSetKeyCallback(window, OnKeyCallback);
+		glfwSetMouseButtonCallback(window, OnMouseButtonCallback);
 		glfwSetCursorPosCallback(window, OnMousePosCallback); // Mouse Position : Camera movement
 	}
 
@@ -33,6 +35,7 @@ private:
 	static glm::vec2 _lastMousePos;
 
     static void OnKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    static void OnMouseButtonCallback(GLFWwindow* window,int button, int action, int mods);
 	static void OnMousePosCallback(GLFWwindow* window, double xpos, double ypos);
 
 };

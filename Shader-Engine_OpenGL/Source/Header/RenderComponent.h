@@ -9,7 +9,6 @@
 
 
 // TODO : Create Camera Component to Help Renderer Function Properly.
-
 class RenderComponent : public Component
 {
 

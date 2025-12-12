@@ -1,14 +1,17 @@
-#include "InputSystem.h"
+#include "Header/InputSystem.h"
 
 
 glm::vec2 InputSystem::LookOffset = glm::vec2(0,0) ;
-glm::vec2 InputSystem::_lastMousePos = glm::vec2(0,0) ;
-
 glm::vec2 InputSystem::MovementInput = glm::vec2(0,0) ;
+bool InputSystem::LeftMousePressed = false;
+
+glm::vec2 InputSystem::_lastMousePos = glm::vec2(0,0) ;
 
 
 void InputSystem::OnKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+
+
 
     MovementInput = glm::vec2(0, 0);
     // FORWARDS/BACKWARDS
@@ -18,6 +21,10 @@ void InputSystem::OnKeyCallback(GLFWwindow* window, int key, int scancode, int a
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) MovementInput.x -= 1;
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) MovementInput.x += 1;
 
+}
+void InputSystem::OnMouseButtonCallback(GLFWwindow* window, int button, int action, int mods){
+    LeftMousePressed = false;
+    LeftMousePressed = button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS ;
 };
 
 void InputSystem::OnMousePosCallback(GLFWwindow* window, double xpos, double ypos)
@@ -33,27 +40,6 @@ void InputSystem::OnMousePosCallback(GLFWwindow* window, double xpos, double ypo
 
 };
 
-
-//// Handles camera movement
-//void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-//{
-
-//    float xoffset = xpos - game.mouseLastX;
-//    float yoffset = game.mouseLastY - ypos;
-//    game.mouseLastX = xpos;
-//    game.mouseLastY = ypos;
-
-//    game.MainCamera.Look(xoffset, yoffset, true);
-
-//}
-
-
-
-//// Scroll wheel callback
-//void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-//{
-//    game.MainCamera.Zoom(yoffset);
-//}
 
 
 

@@ -1,4 +1,4 @@
-#include "Mesh.h"
+#include "Header/Mesh.h"
 
 Mesh::Mesh(std ::vector<Vert> vertices, std::vector<unsigned int> indices, std::vector<Tex> textures)
 {

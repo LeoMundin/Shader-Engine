@@ -14,16 +14,17 @@ class FPSCharacterController : public Component
 {
 public:
 
-	float MovementSpeed = 10.0f;
+	float MovementSpeed = 2.0f;
 
-	FPSCharacterController(Camera* renderCam,TransformComponent *transform) 
+	FPSCharacterController(Camera* renderCam,TransformComponent *transform, RigidbodyComponent *rigidbody) 
 	{
 		_camera = renderCam;
-		_transform = transform;
+		_transformComponent = transform;
+		_rigidbodyComponent = rigidbody;
 	};
 
 	void Update(float deltaTime) override {
-		_camera->Position = _transform->Position;
+		_camera->Position = _transformComponent->Position;
 
 		CameraLook();
 		HorizontalMovement(deltaTime);
@@ -38,15 +39,20 @@ public:
 	void HorizontalMovement(float deltaTime) {
 		
 		// T0-Do : Convert to physics application
-		_camera->Position += InputSystem::MovementInput.y * deltaTime * _camera->Forward * MovementSpeed;
-		_camera->Position += InputSystem::MovementInput.x * deltaTime * _camera->Right * MovementSpeed;
+		rp3d::Vector3 right = _transformComponent->Vector3GlmToRp3d(_camera->Right) * InputSystem::MovementInput.x * MovementSpeed ;
+		_rigidbodyComponent->Rigidbody->applyLocalForceAtCenterOfMass(right);
+
+		rp3d::Vector3 forward = _transformComponent->Vector3GlmToRp3d(_camera->Forward) * InputSystem::MovementInput.y * MovementSpeed ;
+		_rigidbodyComponent->Rigidbody->applyLocalForceAtCenterOfMass(forward);
+
 	}
 
 
 private:
 
 	Camera* _camera;
-	TransformComponent* _transform;
+	TransformComponent* _transformComponent;
+	RigidbodyComponent* _rigidbodyComponent;
 
 };
 

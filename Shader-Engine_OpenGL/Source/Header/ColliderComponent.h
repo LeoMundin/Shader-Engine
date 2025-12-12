@@ -20,6 +20,7 @@ public:
 
 	ColliderComponent(rp3d::PhysicsCommon *physicsCommon,EColliderShape shape, rp3d::RigidBody *rigidbody, TransformComponent *transform, rp3d::Vector3 boxDimensions = rp3d::Vector3(1,1,1)) {
 		switch (shape) {
+			// To-Do: Convert to seperate classes
 		case BOX:
 			// Create the box shape
 			rp3d::BoxShape* boxShape = physicsCommon->createBoxShape(boxDimensions);

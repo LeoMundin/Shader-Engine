@@ -6,9 +6,7 @@
 #include "GameObject.h"
 #include "Player.h"
 
-
-
-
+#include "HealthComponent.h"
 
 class ElderHex : public TuftEngine 
 {
@@ -16,18 +14,13 @@ class ElderHex : public TuftEngine
 public:
 	ElderHex(unsigned int width, unsigned int height) :TuftEngine(width, height) {};
 
-	
-
 	// Scene Assets
-	Player player = Player(&MainCamera);
+	Player player;
 	GameObject bag;
-	GameObject box;
-
+	GameObject Terrain;
 
 protected:
-
-
-	void OnAwake() override;
+	void OnAwake()  override;
 	void OnUpdate() override;
 	void OnRender() override;
 

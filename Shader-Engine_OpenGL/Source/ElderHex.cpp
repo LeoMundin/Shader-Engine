@@ -1,16 +1,19 @@
-#include "ElderHex.h"
+#include "Header/ElderHex.h"
 RigidbodyComponent* BagRigidbody;
-RigidbodyComponent* CubeRigidbody;
 ColliderComponent* BagCollider;
-ColliderComponent* CubeCollider;
+RigidbodyComponent* TerrainRigidbody;
+HealthComponent* TerrainHealth;
+ColliderComponent* TerrainCollider;
 
 void ElderHex::OnAwake() {
 
     //PhysicsWorld->setGravity(rp3d::Vector3(0, -0.2, 0));
 
+    player = Player(&MainCamera, PhysicsWorld);
     player.Transform->Position = glm::vec3(0.0f, 10.0f, 10.0f);
-    RigidbodyComponent *rb = player.addComponent<RigidbodyComponent>(PhysicsWorld, player.Transform);
-    player.addComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, rb->Rigidbody, player.Transform);
+    player.addComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, player.Rigidbody->Rigidbody, player.Transform);
+
+
 
     const char* backpackPath = "Assets/Models/backpack/backpack.obj";
     Model backpack(backpackPath);
@@ -21,14 +24,15 @@ void ElderHex::OnAwake() {
     BagCollider = bag.addComponent<ColliderComponent>(&PhysicsCommon,ColliderComponent::EColliderShape::BOX, BagRigidbody->Rigidbody,bag.Transform);
     //BagRigidbody->SetGravity(false);
 
-    const char* boxPath = "Assets/Models/Primatives/Cube.obj";
-    Model boxModel(boxPath);
-    box.Transform->Position = glm::vec3(0, 0, 0);
-    box.addComponent<RenderComponent>(&lightPos, &MainCamera, box.Transform, boxModel, ourShader);
-    CubeRigidbody = box.addComponent<RigidbodyComponent>(PhysicsWorld, box.Transform);
-    CubeCollider = box.addComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, CubeRigidbody->Rigidbody, box.Transform,rp3d::Vector3(100,0.5,100));
-    CubeRigidbody->SetGravity(false);
-    CubeRigidbody->Rigidbody->setType(rp3d::BodyType::STATIC);
+    const char* terrainPath = "Assets/Models/Terrain/Elderhex_Land/Elderhex_Land.obj";
+    Model boxModel(terrainPath);
+    Terrain.Transform->Position = glm::vec3(0, 0, 0);
+    Terrain.addComponent<RenderComponent>(&lightPos, &MainCamera, Terrain.Transform, boxModel, ourShader);
+    TerrainRigidbody = Terrain.addComponent<RigidbodyComponent>(PhysicsWorld, Terrain.Transform);
+    TerrainCollider = Terrain.addComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, TerrainRigidbody->Rigidbody, Terrain.Transform,rp3d::Vector3(5,1,5));
+    TerrainHealth = Terrain.addComponent<HealthComponent>(3.0f);
+    TerrainRigidbody->SetGravity(false);
+    TerrainRigidbody->Rigidbody->setType(rp3d::BodyType::STATIC);
 
 
 
@@ -42,10 +46,15 @@ void ElderHex::OnUpdate() {
     lightPos = glm::vec3(lightX, lightPos.y, lightZ);
 
 
-
     bag.Update(DeltaTime);
     player.Update(DeltaTime);
-    box.Update(DeltaTime);
+    Terrain.Update(DeltaTime);
+
+    if (InputSystem::LeftMousePressed) {
+        TerrainHealth->TakeDamage(1.0f);
+        std::cout << "Damage Taken" << std::endl;
+    }
+    //box.Destroy();
 
 }
 
@@ -78,8 +87,7 @@ void ElderHex::OnRender() {
 
     //printf("collision = %s\n", PhysicsWorld->testOverlap(CubeRigidbody->Rigidbody, BagRigidbody->Rigidbody) ? "=============================================================" : "false");
 
-
-    bag.Render();
     player.Render();
-    box.Render();
+    bag.Render();
+    Terrain.Render();
 }

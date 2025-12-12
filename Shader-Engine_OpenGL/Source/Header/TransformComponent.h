@@ -59,20 +59,6 @@ public:
 
 	}
 
-
-private:
-	glm::mat4 _transformMatrix;
-
-	void UpdateTransfromMatrix() {
-		_transformMatrix = glm::mat4(1.0f);
-		_transformMatrix = glm::translate(_transformMatrix, Position);
-		_transformMatrix *= glm::mat4_cast(glm::normalize(Rotation));
-		_transformMatrix = glm::scale(_transformMatrix, Scale);
-	}
-
-
-	// Physics Helper functions
-
 	// Quarternion Conversion
 	rp3d::Quaternion QuarternionGlmToRp3d(glm::quat glmQuat) {
 		return rp3d::Quaternion(glmQuat.x, glmQuat.y, glmQuat.z, glmQuat.w);
@@ -89,6 +75,22 @@ private:
 
 		return rp3d::Vector3(glmVec3.x, glmVec3.y, glmVec3.z);
 	}
+
+
+private:
+	glm::mat4 _transformMatrix;
+
+	void UpdateTransfromMatrix() {
+		_transformMatrix = glm::mat4(1.0f);
+		_transformMatrix = glm::translate(_transformMatrix, Position);
+		_transformMatrix *= glm::mat4_cast(glm::normalize(Rotation));
+		_transformMatrix = glm::scale(_transformMatrix, Scale);
+	}
+
+
+	// Physics Helper functions
+
+
 
 };
 

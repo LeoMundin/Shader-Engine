@@ -143,27 +143,28 @@
     <ClCompile Include="Source\VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\CameraComponent.h" />
-    <ClInclude Include="Source\ColliderComponent.h" />
-    <ClInclude Include="Source\FPSCharacterController.h" />
-    <ClInclude Include="Source\Component.h" />
-    <ClInclude Include="Source\EBO.h" />
-    <ClInclude Include="Source\ElderHex.h" />
-    <ClInclude Include="Source\Entity.h" />
-    <ClInclude Include="Source\GameObject.h" />
-    <ClInclude Include="Source\InputSystem.h" />
-    <ClInclude Include="Source\Mesh.h" />
-    <ClInclude Include="Source\Model.h" />
-    <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\RenderComponent.h" />
-    <ClInclude Include="Source\RigidbodyComponent.h" />
-    <ClInclude Include="Source\Shader.h" />
-    <ClInclude Include="Source\Texture.h" />
-    <ClInclude Include="Source\TransformComponent.h" />
-    <ClInclude Include="Source\TuftEngine.h" />
-    <ClInclude Include="Source\VAO.h" />
-    <ClInclude Include="Source\VBO.h" />
+    <ClInclude Include="Source\Header\Camera.h" />
+    <ClInclude Include="Source\Header\CameraComponent.h" />
+    <ClInclude Include="Source\Header\ColliderComponent.h" />
+    <ClInclude Include="Source\Header\FPSCharacterController.h" />
+    <ClInclude Include="Source\Header\Component.h" />
+    <ClInclude Include="Source\Header\EBO.h" />
+    <ClInclude Include="Source\Header\ElderHex.h" />
+    <ClInclude Include="Source\Header\Entity.h" />
+    <ClInclude Include="Source\Header\GameObject.h" />
+    <ClInclude Include="Source\Header\HealthComponent.h" />
+    <ClInclude Include="Source\Header\InputSystem.h" />
+    <ClInclude Include="Source\Header\Mesh.h" />
+    <ClInclude Include="Source\Header\Model.h" />
+    <ClInclude Include="Source\Header\Player.h" />
+    <ClInclude Include="Source\Header\RenderComponent.h" />
+    <ClInclude Include="Source\Header\RigidbodyComponent.h" />
+    <ClInclude Include="Source\Header\Shader.h" />
+    <ClInclude Include="Source\Header\Texture.h" />
+    <ClInclude Include="Source\Header\TransformComponent.h" />
+    <ClInclude Include="Source\Header\TuftEngine.h" />
+    <ClInclude Include="Source\Header\VAO.h" />
+    <ClInclude Include="Source\Header\VBO.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\FragmentShader.frag" />

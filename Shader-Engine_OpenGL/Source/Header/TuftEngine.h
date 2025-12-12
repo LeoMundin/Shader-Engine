@@ -54,8 +54,7 @@ class TuftEngine {
         // Input
         InputSystem Input;
 
-        
-
+       
         // Constructor
         TuftEngine() {};
         TuftEngine(unsigned int width, unsigned int height)
@@ -132,7 +131,7 @@ class TuftEngine {
                 glfwSetInputMode(MainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);// Hide and capture cursor.
                 SetGLFWCallbacks(MainWindow);
 
-            }
+        }
         void InitialiseGlad(){
                 if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
                 {
@@ -146,7 +145,7 @@ class TuftEngine {
 
         }
 
-        // External Lifecycle Methods
+        // Internal Lifecycle Methods
         void ProcessInput() {
             glfwPollEvents(); // Checks for event updates such as user input, and calls any registered call-back functions
         }
@@ -168,7 +167,6 @@ class TuftEngine {
 
 
     protected:
-        
         // Delta Time
         float _currentFrameTime;
         float _lastFrameTime;
@@ -187,10 +185,10 @@ class TuftEngine {
                     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         }
 
-        // Internal Lifecycle methods
-        virtual void OnAwake() {};
-        virtual void OnUpdate() {};
-        virtual void OnRender() {};
+        // External Lifecycle Hooks
+        virtual void OnAwake() {}; // Runs once before Game loop starts.
+        virtual void OnUpdate() {}; // Runs every frame to update game logic.
+        virtual void OnRender() {}; // Updates rendering every frame.
 
 };
 

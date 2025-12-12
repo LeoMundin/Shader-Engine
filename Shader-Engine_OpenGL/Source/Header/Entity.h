@@ -15,9 +15,11 @@ public:
 
 	// TODO - Implement hash table to store components with ID for easy look up.
 
+
 	template <typename T, typename ... TArgs>
 	T* addComponent(TArgs&&... args) {
 		auto component = std::make_shared<T>(std::forward<TArgs>(args)...);
+		component->owner = this;
 		_components.emplace_back(component);
 		return component.get();
 	}
@@ -26,18 +28,28 @@ public:
 	// TO DO : implement a get component function
 
 	void Update(float deltaTime) {
+		if (!_isActive) return;
 		for (auto& component : _components) {
 			component->Update(deltaTime);
 		}
 	};
 	
 	void Render() {
+		if (!_isActive) return;
 		for (auto& component : _components) {
 			component->Render();
 		}
 	};
 
+	void Destroy() {
+		_isActive = false;
+	}
+
+
 private:
+
+	bool _isActive = true ;
+
 	std::vector<std::shared_ptr<Component>> _components;
 };
 
