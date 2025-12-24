@@ -3,7 +3,13 @@
 #define GAMEOBJECT_H
 
 #include "Entity.h"
-#include "TransformComponent.h"
+#include "Components/TransformComponent.h"
+
+// Additional Components
+#include "Components/RenderComponent.h"
+#include "Components/RigidbodyComponent.h"
+#include "Components/ColliderComponent.h"
+#include "Components/CameraComponent.h"
 
 class GameObject : public Entity 
 {

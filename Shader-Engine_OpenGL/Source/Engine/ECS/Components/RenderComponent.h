@@ -4,7 +4,7 @@
 
 #include "Component.h"
 #include "TransformComponent.h"
-#include "Model.h"
+#include "../Core/Model_Loading/Model.h"
 #include "Camera.h"
 
 

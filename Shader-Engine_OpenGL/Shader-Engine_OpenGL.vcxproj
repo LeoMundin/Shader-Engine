@@ -130,19 +130,42 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="External\Include\glad\glad.c" />
-    <ClCompile Include="Source\EBO.cpp" />
-    <ClCompile Include="Source\ElderHex.cpp" />
-    <ClCompile Include="Source\InputSystem.cpp" />
+    <ClCompile Include="Source\Engine\Core\Model_Loading\Mesh.cpp" />
+    <ClCompile Include="Source\Engine\Core\Model_Loading\Model.cpp" />
+    <ClCompile Include="Source\Engine\Core\Rendering\EBO.cpp" />
+    <ClCompile Include="Source\Engine\Core\Rendering\Shaders\Shader.cpp" />
+    <ClCompile Include="Source\Engine\Core\Rendering\StbImageImplementation.cpp" />
+    <ClCompile Include="Source\Engine\Core\Rendering\Texture.cpp" />
+    <ClCompile Include="Source\Engine\Core\Rendering\VAO.cpp" />
+    <ClCompile Include="Source\Engine\Core\Rendering\VBO.cpp" />
+    <ClCompile Include="Source\Engine\Input\InputSystem.cpp" />
+    <ClCompile Include="Source\Game\ElderHex.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Mesh.cpp" />
-    <ClCompile Include="Source\Model.cpp" />
-    <ClCompile Include="Source\Shader.cpp" />
-    <ClCompile Include="Source\StbImageImplementation.cpp" />
-    <ClCompile Include="Source\Texture.cpp" />
-    <ClCompile Include="Source\VAO.cpp" />
-    <ClCompile Include="Source\VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Engine\Core\Core.h" />
+    <ClInclude Include="Source\Engine\Core\Model_Loading\Mesh.h" />
+    <ClInclude Include="Source\Engine\Core\Model_Loading\Model.h" />
+    <ClInclude Include="Source\Engine\Core\Rendering\Camera.h" />
+    <ClInclude Include="Source\Engine\Core\Rendering\EBO.h" />
+    <ClInclude Include="Source\Engine\Core\Rendering\Shaders\Shader.h" />
+    <ClInclude Include="Source\Engine\Core\Rendering\Texture.h" />
+    <ClInclude Include="Source\Engine\Core\Rendering\VAO.h" />
+    <ClInclude Include="Source\Engine\Core\Rendering\VBO.h" />
+    <ClInclude Include="Source\Engine\ECS\Component.h" />
+    <ClInclude Include="Source\Engine\ECS\Components\CameraComponent.h" />
+    <ClInclude Include="Source\Engine\ECS\Components\ColliderComponent.h" />
+    <ClInclude Include="Source\Engine\ECS\Components\RenderComponent.h" />
+    <ClInclude Include="Source\Engine\ECS\Components\RigidbodyComponent.h" />
+    <ClInclude Include="Source\Engine\ECS\Components\TransformComponent.h" />
+    <ClInclude Include="Source\Engine\ECS\Entity.h" />
+    <ClInclude Include="Source\Engine\ECS\GameObject.h" />
+    <ClInclude Include="Source\Engine\Input\InputSystem.h" />
+    <ClInclude Include="Source\Engine\TuftEngine.h" />
+    <ClInclude Include="Source\Game\Components\HealthComponent.h" />
+    <ClInclude Include="Source\Game\ElderHex.h" />
+    <ClInclude Include="Source\Game\Player\FPSCharacterController.h" />
+    <ClInclude Include="Source\Game\Player\PlayerGameObject.h" />
     <ClInclude Include="Source\Header\Camera.h" />
     <ClInclude Include="Source\Header\CameraComponent.h" />
     <ClInclude Include="Source\Header\ColliderComponent.h" />

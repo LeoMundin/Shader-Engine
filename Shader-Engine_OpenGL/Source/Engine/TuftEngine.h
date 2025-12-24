@@ -12,20 +12,9 @@
 #include "reactphysics3d/reactphysics3d.h"
 
 // INTERNAL
-#include "VAO.h"
-#include "Model.h"
-#include "Shader.h"
-#include "Texture.h"
-#include "Camera.h"
-
-#include "Entity.h"
-#include "TransformComponent.h"
-#include "RenderComponent.h"
-#include "RigidbodyComponent.h"
-#include "ColliderComponent.h"
-#include "CameraComponent.h"
-
-#include "InputSystem.h"
+#include "Core/Core.h"
+#include "ECS/GameObject.h"
+#include "Input/InputSystem.h"
 
 
 class TuftEngine {

@@ -1,4 +1,4 @@
-#include "Header/InputSystem.h"
+#include "InputSystem.h"
 
 
 glm::vec2 InputSystem::LookOffset = glm::vec2(0,0) ;

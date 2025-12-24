@@ -2,8 +2,7 @@
 #ifndef HEALTHCOMPONENT_H
 #define HEALTHCOMPONENT_H
 
-#include "Component.h"
-#include "GameObject.h"
+#include "../ElderHex.h"
 
 class HealthComponent : public Component
 {

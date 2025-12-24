@@ -1,4 +1,4 @@
-#include "Header/Texture.h"
+#include "Texture.h"
 
 Texture::Texture(const char* filePath, bool flipTexture)
 {

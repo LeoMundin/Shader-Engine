@@ -2,9 +2,7 @@
 #ifndef FPSCHARACTERCONTROLLER_H
 #define FPSCHARACTERCONTROLLER_H
 
-#include "Component.h"
-#include "InputSystem.h"
-#include "Camera.h"
+#include "../ElderHex.h"
 
 
 /// <summary>

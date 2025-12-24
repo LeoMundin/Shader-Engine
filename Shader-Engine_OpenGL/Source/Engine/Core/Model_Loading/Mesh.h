@@ -4,11 +4,12 @@
 
 #include <iostream>
 #include <vector>
-#include "VAO.h"
-#include "Shader.h"
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
+
+#include "../Rendering/VAO.h"
+#include "../Rendering/Shaders/Shader.h"
 
 
 struct Vert {

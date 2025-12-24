@@ -2,11 +2,10 @@
 #ifndef ELDERHEX_H
 #define ELDERHEX_H
 
-#include "TuftEngine.h"
-#include "GameObject.h"
-#include "Player.h"
+#include "../Engine/TuftEngine.h"
 
-#include "HealthComponent.h"
+#include "Player/PlayerGameObject.h"
+#include "Components/HealthComponent.h"
 
 class ElderHex : public TuftEngine 
 {
