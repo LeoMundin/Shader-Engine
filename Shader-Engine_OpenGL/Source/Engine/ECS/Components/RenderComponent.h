@@ -2,9 +2,9 @@
 #ifndef RENDERCOMPONENT_H
 #define RENDERCOMPONENT_H
 
-#include "Component.h"
+#include "../Component.h"
 #include "TransformComponent.h"
-#include "../Core/Model_Loading/Model.h"
+#include "../Engine/Core/Model_Loading/Model.h"
 #include "Camera.h"
 
 

@@ -2,7 +2,7 @@
 #ifndef CAMERACOMPONENT_H
 #define CAMERACOMPONENT_H
 
-#include "Component.h"
+#include "../Component.h"
 #include "Camera.h"
 
 class CameraComponent : public Component 

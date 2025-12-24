@@ -191,6 +191,9 @@
     <ClInclude Include="Source\Engine\Core\Model_Loading\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Game\GameObjects\Terrain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\FragmentShader.frag">

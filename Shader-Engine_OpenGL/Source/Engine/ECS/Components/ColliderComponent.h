@@ -4,7 +4,7 @@
 
 #include "reactphysics3d.h"
 
-#include "Component.h"
+#include "../Component.h"
 #include "TransformComponent.h"
 
 class ColliderComponent : public Component

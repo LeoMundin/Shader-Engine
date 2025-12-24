@@ -10,6 +10,7 @@
 *.ipch
 
 # Visual Studio build output
+Shader-E.f0adae59/
 x64/
 x86/
 Debug/

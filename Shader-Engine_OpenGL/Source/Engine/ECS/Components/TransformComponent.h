@@ -8,7 +8,7 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-#include "Component.h"
+#include "../Component.h"
 
 
 class TransformComponent: public Component

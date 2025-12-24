@@ -164,6 +164,7 @@
     <ClInclude Include="Source\Engine\TuftEngine.h" />
     <ClInclude Include="Source\Game\Components\HealthComponent.h" />
     <ClInclude Include="Source\Game\ElderHex.h" />
+    <ClInclude Include="Source\Game\GameObjects\Terrain.h" />
     <ClInclude Include="Source\Game\Player\FPSCharacterController.h" />
     <ClInclude Include="Source\Game\Player\PlayerGameObject.h" />
     <ClInclude Include="Source\Header\Camera.h" />
