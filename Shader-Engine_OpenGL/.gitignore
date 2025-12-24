@@ -1,45 +1,118 @@
-# Folder paths
-*/.vs
+# =================================================
+# Visual Studio / IDE files
+# =================================================
 
+.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+*.ipch
+
+# Visual Studio build output
+x64/
+x86/
+Debug/
+Release/
+
+# =================================================
 # Prerequisites
+# =================================================
+
 *.d
 
-# Compiled Object files
-*.slo
-*.lo
+# =================================================
+# Compiled Object files (C/C++)
+# =================================================
+
 *.o
+*.lo
+*.slo
 
-
+# =================================================
 # Precompiled Headers
+# =================================================
+
 *.gch
 *.pch
 
-# Linker files
+# =================================================
+# Linker / Debugger files
+# =================================================
+
 *.ilk
-
-# Debugger Files
 *.pdb
+*.idb
+*.dwo
 
+# =================================================
+# Libraries
+# =================================================
 
-# Compiled Dynamic libraries
+# Dynamic libraries
 *.so
 *.dylib
 
-# Fortran module files
+# Static libraries
+*.a
+*.la
+*.lai
+
+# Fortran modules
 *.mod
 *.smod
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-
-
+# =================================================
 # Executables
+# =================================================
+
 *.exe
 *.out
 *.app
 
-# debug information files
-*.dwo
-*.idb
+# =================================================
+# Shader cache / temporary GPU artifacts
+# =================================================
+
+*.spv
+*.cache
+*.tmp
+
+# =================================================
+# Asset rules (explicitly allowed)
+# =================================================
+
+# 3D Models
+!Shader-Engine_OpenGL/Assets/**/*.obj
+!Shader-Engine_OpenGL/Assets/**/*.fbx
+!Shader-Engine_OpenGL/Assets/**/*.dae
+!Shader-Engine_OpenGL/Assets/**/*.gltf
+!Shader-Engine_OpenGL/Assets/**/*.glb
+
+# Model materials
+!Shader-Engine_OpenGL/Assets/**/*.mtl
+
+# Textures
+!Shader-Engine_OpenGL/Assets/**/*.png
+!Shader-Engine_OpenGL/Assets/**/*.jpg
+!Shader-Engine_OpenGL/Assets/**/*.jpeg
+!Shader-Engine_OpenGL/Assets/**/*.tga
+!Shader-Engine_OpenGL/Assets/**/*.bmp
+!Shader-Engine_OpenGL/Assets/**/*.hdr
+
+# Shaders
+!Shader-Engine_OpenGL/Assets/**/*.vert
+!Shader-Engine_OpenGL/Assets/**/*.frag
+!Shader-Engine_OpenGL/Assets/**/*.geom
+!Shader-Engine_OpenGL/Assets/**/*.glsl
+
+# Audio
+!Shader-Engine_OpenGL/Assets/**/*.wav
+!Shader-Engine_OpenGL/Assets/**/*.ogg
+!Shader-Engine_OpenGL/Assets/**/*.mp3
+
+# =================================================
+# Safety: explicitly do NOT use Git LFS
+# =================================================
+
+*.gitattributes
