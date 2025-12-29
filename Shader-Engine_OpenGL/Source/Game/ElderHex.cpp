@@ -8,23 +8,21 @@ void ElderHex::OnAwake() {
     TerrainGameObject = Terrain(&MainCamera, PhysicsWorld, &lightPos, &PhysicsCommon);
 
     PlayerGameObject = Player(&MainCamera, PhysicsWorld);
-    PlayerGameObject.Transform->Position = glm::vec3(0.0f, 10.0f, 10.0f);
     PlayerGameObject.addComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, PlayerGameObject.Rigidbody->Rigidbody, PlayerGameObject.Transform);
-
-
 
 }
 
 void ElderHex::OnUpdate() {
     // Move Light
-    const float radius = 8.0f;
-    float lightX = sin(glfwGetTime()) * radius;
-    float lightZ = cos(glfwGetTime()) * radius;
-    lightPos = glm::vec3(lightX, lightPos.y, lightZ);
+    const float SUN_HEIGHT = 100.0f;
+    const float SUN_DURATION = 24.0f;
+    float sunY = sin(glfwGetTime() / SUN_DURATION) * SUN_HEIGHT;
+    float sunX = cos(glfwGetTime() / SUN_DURATION) * SUN_HEIGHT;
+    lightPos = glm::vec3(sunX, sunY,lightPos.z);
 
 
-    PlayerGameObject.Update(DeltaTime);
     TerrainGameObject.Update(DeltaTime);
+    PlayerGameObject.Update(DeltaTime);
 
 
 
@@ -32,6 +30,6 @@ void ElderHex::OnUpdate() {
 
 void ElderHex::OnRender() {
 
-    PlayerGameObject.Render();
     TerrainGameObject.Render();
+    PlayerGameObject.Render();
 }

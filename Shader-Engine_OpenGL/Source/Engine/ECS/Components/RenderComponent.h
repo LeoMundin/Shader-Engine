@@ -30,7 +30,7 @@ public:
 
 		_modelMatrix = _transfrom->GetTransfromMatrix();
 		_viewMatrix = _renderCam->GetCameraViewMatrix();
-		_projectionMatrix = glm::perspective(glm::radians(_renderCam->fov), 800.0f / 600.0f, 0.1f, 100.0f);
+		_projectionMatrix = glm::perspective(glm::radians(_renderCam->fov), 800.0f / 600.0f, 0.1f, 500.0f);
 
 		_shader.setMat4("model", _modelMatrix);
 		_shader.setMat4("view", _viewMatrix);

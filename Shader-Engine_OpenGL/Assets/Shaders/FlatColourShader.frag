@@ -9,13 +9,6 @@ uniform vec3 lightPos;
 uniform vec3 objectColor =  vec3(1.0f, 1.0f, 1.0f);
 uniform vec3 lightColor = vec3( 1.0f, 0.9f, 0.4f);
 
-// Texture
-in vec2 TexCoords;
-uniform sampler2D texture_diffuse1;
-uniform sampler2D texture_diffuse2;
-uniform sampler2D texture_specular1;
-uniform sampler2D texture_specular2;
-
 // Helper Methods
 vec3 CalculateLighting();
 
@@ -26,11 +19,12 @@ void main()
 
     vec3 calculatedLight = CalculateLighting();
 
-    vec4 litTexture = vec4(calculatedLight, 1.0) *  texture(texture_diffuse1, TexCoords) *  vec4(objectColor, 1.0);
+    vec4 litTexture = vec4(calculatedLight, 1.0) *  vec4(objectColor,1.0);
 
     FragColor = litTexture  ;
 
 }
+
 
 
 

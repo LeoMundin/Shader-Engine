@@ -205,5 +205,6 @@
     <None Include="Assets\Shaders\VertexShader.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="Assets\Shaders\FlatColourShader.frag" />
   </ItemGroup>
 </Project>

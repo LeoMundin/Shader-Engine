@@ -24,7 +24,7 @@ public :
 
 	}
 
-	void  Render() override {
+	void Update(float deltaTime) override {
 		_transformComponent->SetPhysicsTransform(Rigidbody->getTransform());
 	}
 

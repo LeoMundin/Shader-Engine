@@ -191,6 +191,7 @@
     <ClInclude Include="Source\Header\VBO.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\FlatColourShader.frag" />
     <None Include="Assets\Shaders\FragmentShader.frag" />
     <None Include="Assets\Shaders\LightFragmentShader.frag" />
     <None Include="Assets\Shaders\VertexShader.vert" />
