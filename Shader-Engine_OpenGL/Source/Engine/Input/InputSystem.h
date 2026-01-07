@@ -10,6 +10,8 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
+#include "../Events/Event.h"
+
 
 class InputSystem 
 {
@@ -18,6 +20,9 @@ public:
 	static glm::vec2 LookOffset;
     static glm::vec2 MovementInput;
 	static bool LeftMousePressed;
+
+	static Event OnLeftMouseButtonDown;
+
 
 	InputSystem(){};
 	InputSystem(GLFWwindow* window) 
@@ -30,6 +35,9 @@ public:
 		glfwSetCursorPosCallback(window, OnMousePosCallback); // Mouse Position : Camera movement
 	}
 
+
+
+
 private:
 
 	static glm::vec2 _lastMousePos;
@@ -37,6 +45,8 @@ private:
     static void OnKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
     static void OnMouseButtonCallback(GLFWwindow* window,int button, int action, int mods);
 	static void OnMousePosCallback(GLFWwindow* window, double xpos, double ypos);
+
+	static void LeftMouseButtonDown();
 
 };
 

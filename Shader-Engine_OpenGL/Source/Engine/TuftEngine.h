@@ -15,6 +15,7 @@
 #include "Core/Core.h"
 #include "ECS/GameObject.h"
 #include "Input/InputSystem.h"
+#include "Events/Event.h"
 
 
 class TuftEngine {
@@ -26,8 +27,6 @@ class TuftEngine {
 
         // Screen
         GLFWwindow *MainWindow = nullptr;
-        unsigned int ScreenWidth;
-        unsigned int ScreenHeight;
 
         // Physics
         const float GRAVITY = -9.83f;
@@ -95,11 +94,16 @@ class TuftEngine {
             glViewport(0, 0, width, height);
         }
 
-
+        unsigned int GetScreenWidth() {return ScreenWidth;};
+        unsigned int GetScreenHeight() {return ScreenHeight;};
+       
 
     private:
         // Physics world settings object
         rp3d::PhysicsWorld::WorldSettings settings;
+
+        unsigned int ScreenWidth;
+        unsigned int ScreenHeight;
 
         void InitialiseGLFW() {
                 // GLFW Libary settings
@@ -151,6 +155,12 @@ class TuftEngine {
 
             OnRender();
 
+            // Clear depth information and draw UI ontop of 3D elements
+            glClear(GL_DEPTH_BUFFER_BIT);
+            glDisable(GL_DEPTH_TEST);
+            OnRenderUI();
+            glEnable(GL_DEPTH_TEST);
+
             glfwSwapBuffers(MainWindow);// Swaps the rendered, back buffer, with the front buffer to display rendered content.
         }
 
@@ -178,6 +188,7 @@ class TuftEngine {
         virtual void OnAwake() {}; // Runs once before Game loop starts.
         virtual void OnUpdate() {}; // Runs every frame to update game logic.
         virtual void OnRender() {}; // Updates rendering every frame.
+        virtual void OnRenderUI() {}; // Updates rendering for UI which whould be layered ontop of game, every frame.
 
 };
 

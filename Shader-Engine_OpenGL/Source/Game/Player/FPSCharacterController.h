@@ -8,17 +8,22 @@
 /// <summary>
 /// Handles movement and rotation of a camera to emulate first person control.
 /// </summary>
-class FPSCharacterController : public Component
+class FpsMovementComponent : public Component
 {
 public:
 
 	float MovementSpeed = 20.0f;
+	
 
-	FPSCharacterController(Camera* renderCam,TransformComponent *transform, RigidbodyComponent *rigidbody) 
+	FpsMovementComponent(Camera* renderCam,TransformComponent *transform, RigidbodyComponent *rigidbody) 
 	{
 		_camera = renderCam;
 		_transformComponent = transform;
 		_rigidbodyComponent = rigidbody;
+
+		// Subscribe to Event
+		InputSystem::OnLeftMouseButtonDown.AddSubscriber([this]() {this->Attack();});
+
 	};
 
 
@@ -29,6 +34,10 @@ public:
 
 		CameraLook();
 		HorizontalMovement(deltaTime);
+
+		
+
+
 	}
 
 	void CameraLook() {
@@ -47,6 +56,10 @@ public:
 
 	}
 
+	void Attack() {
+		std::cout << "Attacking" << std::endl;
+		// To-Do : Spawn ray cast out of camera center, and deal damage to any colliders with a health component.
+	}
 
 private:
 

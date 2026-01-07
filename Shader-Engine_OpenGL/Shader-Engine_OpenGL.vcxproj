@@ -140,6 +140,8 @@
     <ClCompile Include="Source\Engine\Core\Rendering\VBO.cpp" />
     <ClCompile Include="Source\Engine\Input\InputSystem.cpp" />
     <ClCompile Include="Source\Game\ElderHex.cpp" />
+    <ClCompile Include="Source\Game\Events\GameEventsManager.cpp" />
+    <ClCompile Include="Source\Game\Events\InputEvents.h" />
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +151,7 @@
     <ClInclude Include="Source\Engine\Core\Rendering\Camera.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\EBO.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\Shaders\Shader.h" />
+    <ClInclude Include="Source\Engine\Core\Rendering\SpriteRenderer.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\Texture.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\VAO.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\VBO.h" />
@@ -160,13 +163,19 @@
     <ClInclude Include="Source\Engine\ECS\Components\TransformComponent.h" />
     <ClInclude Include="Source\Engine\ECS\Entity.h" />
     <ClInclude Include="Source\Engine\ECS\GameObject.h" />
+    <ClInclude Include="Source\Engine\Events\Event.h" />
     <ClInclude Include="Source\Engine\Input\InputSystem.h" />
     <ClInclude Include="Source\Engine\TuftEngine.h" />
     <ClInclude Include="Source\Game\Components\HealthComponent.h" />
     <ClInclude Include="Source\Game\ElderHex.h" />
+    <ClInclude Include="Source\Game\Events\GameEventsManager.h" />
+    <ClInclude Include="Source\Game\Events\PlayerEvents.h" />
+    <ClInclude Include="Source\Game\GameObjects\TargetDummy.h" />
     <ClInclude Include="Source\Game\GameObjects\Terrain.h" />
+    <ClInclude Include="Source\Game\GameObjects\Trap.h" />
     <ClInclude Include="Source\Game\Player\FPSCharacterController.h" />
     <ClInclude Include="Source\Game\Player\PlayerGameObject.h" />
+    <ClInclude Include="Source\Game\Player\UI\HealthBar.h" />
     <ClInclude Include="Source\Header\Camera.h" />
     <ClInclude Include="Source\Header\CameraComponent.h" />
     <ClInclude Include="Source\Header\ColliderComponent.h" />
@@ -194,6 +203,8 @@
     <None Include="Assets\Shaders\FlatColourShader.frag" />
     <None Include="Assets\Shaders\FragmentShader.frag" />
     <None Include="Assets\Shaders\LightFragmentShader.frag" />
+    <None Include="Assets\Shaders\SpriteFragShader.frag" />
+    <None Include="Assets\Shaders\SpriteVertShader.vert" />
     <None Include="Assets\Shaders\VertexShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

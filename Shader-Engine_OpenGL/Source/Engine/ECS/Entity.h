@@ -41,6 +41,13 @@ public:
 		}
 	};
 
+	void RenderUI() {
+		if (!_isActive) return;
+		for (auto& component : _components) {
+			component->RenderUI();
+		}
+	};
+
 	void Destroy() {
 		_isActive = false;
 	}
