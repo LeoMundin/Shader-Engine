@@ -149,6 +149,7 @@
     <ClInclude Include="Source\Engine\Core\Rendering\Camera.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\EBO.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\Shaders\Shader.h" />
+    <ClInclude Include="Source\Engine\Core\Rendering\SpriteRenderer.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\Texture.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\VAO.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\VBO.h" />
@@ -194,6 +195,8 @@
     <None Include="Assets\Shaders\FlatColourShader.frag" />
     <None Include="Assets\Shaders\FragmentShader.frag" />
     <None Include="Assets\Shaders\LightFragmentShader.frag" />
+    <None Include="Assets\Shaders\SpriteFragShader.frag" />
+    <None Include="Assets\Shaders\SpriteVertShader.vert" />
     <None Include="Assets\Shaders\VertexShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -22,6 +22,7 @@ protected:
 	void OnAwake()  override;
 	void OnUpdate() override;
 	void OnRender() override;
+	void OnRenderUI() override;
 
 };
 
