@@ -21,7 +21,7 @@ public:
     /// <summary>
     /// Renders a 2D image, overlaid on top of the main renderered scene.
     /// </summary>
-    void DrawSprite( float screenWidth, float sreenHeight, Texture texture, glm::vec2 position, glm::vec2 size, float rotation, glm::vec3 colour = glm::vec3(1.0f)) {
+    void DrawSprite( float screenWidth, float sreenHeight, glm::vec2 position, glm::vec2 size, float rotation, glm::vec3 colour = glm::vec3(1.0f), Texture* texture = nullptr) {
         // To-Do : Turn into 2D Transform Component
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(position, 0.0f));
@@ -41,8 +41,10 @@ public:
         #pragma region Model
         _shader.setVec3("spriteColor", colour);
         _shader.useProgram();
-        glActiveTexture(GL_TEXTURE0);
-        texture.Bind();
+        
+        glActiveTexture(GL_TEXTURE0);   
+        texture->Bind();
+        
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
 

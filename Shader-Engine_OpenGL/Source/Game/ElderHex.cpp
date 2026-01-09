@@ -5,20 +5,10 @@ Texture* SpriteTexture;
 
 void ElderHex::OnAwake() {
 
-    // load shaders
-    Shader SpriteShader("Assets/Shaders/SpriteVertShader.vert", "Assets/Shaders/SpriteFragShader.frag");
-    // configure shaders
-
-    // set render-specific controls
-    Renderer = SpriteRenderer(SpriteShader);
-    SpriteTexture = new Texture("Assets/Textures/awesomeface.png", false);
-
-    //std::cout << SpriteShader.ID << std::endl;
-
     //PhysicsWorld->setGravity(rp3d::Vector3(0, -0.2, 0));
     TerrainGameObject = Terrain(&MainCamera, PhysicsWorld, &lightPos, &PhysicsCommon);
 
-    PlayerGameObject = Player(&MainCamera, PhysicsWorld);
+    PlayerGameObject = Player(&MainCamera, PhysicsWorld,GetScreenWidth(),GetScreenHeight());
     PlayerGameObject.addComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, PlayerGameObject.Rigidbody->Rigidbody, PlayerGameObject.Transform);
 
 }
@@ -37,22 +27,19 @@ void ElderHex::OnUpdate() {
 
 
 
+
 }
 
 void ElderHex::OnRender() {
 
     TerrainGameObject.Render();
     PlayerGameObject.Render();
+
 }
 
 void ElderHex::OnRenderUI() {
-    float screenHeight = GetScreenHeight();
-    float screenWidth = GetScreenWidth();
-    glm::vec2 spritePosition = glm::vec2(screenWidth /2, screenHeight/2);
-    glm::vec2 spriteSize = glm::vec2(400.0f, 400.0f);
-    float spriteRotation = 0.0f;
-    glm::vec3 spriteColour = glm::vec3(1.0f);
-    
-    Renderer.DrawSprite(screenWidth, screenHeight,*SpriteTexture, spritePosition, spriteSize, spriteRotation, spriteColour);
+
+    //UI
+    PlayerGameObject.PlayerHealthBar.Render();
 
 }

@@ -17,8 +17,6 @@ public:
 		_currentHealth = MaxHealth;
 	}
 
-
-
 	void TakeDamage(float damage) {
 		OnTakeDamage();
 		_currentHealth -= damage;
