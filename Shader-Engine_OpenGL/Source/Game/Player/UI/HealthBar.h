@@ -39,6 +39,9 @@ public:
 		spriteShader.setBool("canLoadTexture", true);
 		_healthBarSprite = SpriteRenderer(spriteShader);
 
+		// Subscribe to event
+		GameEventsManager::GetInstance()->OnTakeDamage.AddSubscriber([this](){ this->OnHealthReduction(); });
+
 	};
 
 	// Lifescycle Hooks
@@ -53,6 +56,14 @@ public:
 
 	}
 
+	void OnHealthReduction() {
+	    std::cout << "Player took damage..." << std::endl;
+		if (MaxNumHealthBars > 0) {
+
+			MaxNumHealthBars -- ;
+		}
+
+	}
 	void OnHealthReduction(int numBars) {
 		if (MaxNumHealthBars > 0 && numBars <= MaxNumHealthBars) {
 			MaxNumHealthBars -= numBars;

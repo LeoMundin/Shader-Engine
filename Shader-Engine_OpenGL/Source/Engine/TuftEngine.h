@@ -15,6 +15,7 @@
 #include "Core/Core.h"
 #include "ECS/GameObject.h"
 #include "Input/InputSystem.h"
+#include "Events/Event.h"
 
 
 class TuftEngine {

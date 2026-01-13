@@ -9,15 +9,15 @@ class HealthComponent : public Component
 
 public:
 
-	float MaxHealth;
+	int MaxHealth;
 
-	HealthComponent(float maxHealth)
+	HealthComponent(int maxHealth)
 	{
 		MaxHealth = maxHealth;
 		_currentHealth = MaxHealth;
 	}
 
-	void TakeDamage(float damage) {
+	void TakeDamage(int damage) {
 		OnTakeDamage();
 		_currentHealth -= damage;
 		ValidateCurrentHealth();
@@ -32,7 +32,7 @@ public:
 
 private:
 
-	float _currentHealth;
+	int _currentHealth;
 
 	void ValidateCurrentHealth() {
 		if (_currentHealth <= 0) {

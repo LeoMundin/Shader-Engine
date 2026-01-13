@@ -8,13 +8,14 @@
 /// <summary>
 /// Handles movement and rotation of a camera to emulate first person control.
 /// </summary>
-class FPSCharacterController : public Component
+class FpsMovementComponent : public Component
 {
 public:
 
 	float MovementSpeed = 20.0f;
+	
 
-	FPSCharacterController(Camera* renderCam,TransformComponent *transform, RigidbodyComponent *rigidbody) 
+	FpsMovementComponent(Camera* renderCam,TransformComponent *transform, RigidbodyComponent *rigidbody) 
 	{
 		_camera = renderCam;
 		_transformComponent = transform;
@@ -29,6 +30,12 @@ public:
 
 		CameraLook();
 		HorizontalMovement(deltaTime);
+
+		if (InputSystem::LeftMousePressed) {
+			// call event;
+			GameEventsManager::GetInstance()->TakeDamage();
+		}
+
 	}
 
 	void CameraLook() {
