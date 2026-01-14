@@ -141,6 +141,7 @@
     <ClCompile Include="Source\Engine\Input\InputSystem.cpp" />
     <ClCompile Include="Source\Game\ElderHex.cpp" />
     <ClCompile Include="Source\Game\Events\GameEventsManager.cpp" />
+    <ClCompile Include="Source\Game\Events\InputEvents.h" />
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +169,10 @@
     <ClInclude Include="Source\Game\Components\HealthComponent.h" />
     <ClInclude Include="Source\Game\ElderHex.h" />
     <ClInclude Include="Source\Game\Events\GameEventsManager.h" />
+    <ClInclude Include="Source\Game\Events\PlayerEvents.h" />
+    <ClInclude Include="Source\Game\GameObjects\TargetDummy.h" />
     <ClInclude Include="Source\Game\GameObjects\Terrain.h" />
+    <ClInclude Include="Source\Game\GameObjects\Trap.h" />
     <ClInclude Include="Source\Game\Player\FPSCharacterController.h" />
     <ClInclude Include="Source\Game\Player\PlayerGameObject.h" />
     <ClInclude Include="Source\Game\Player\UI\HealthBar.h" />

@@ -20,6 +20,10 @@ public:
 		_camera = renderCam;
 		_transformComponent = transform;
 		_rigidbodyComponent = rigidbody;
+
+		// Subscribe to Event
+		InputSystem::OnLeftMouseButtonDown.AddSubscriber([this]() {this->Attack();});
+
 	};
 
 
@@ -31,10 +35,8 @@ public:
 		CameraLook();
 		HorizontalMovement(deltaTime);
 
-		if (InputSystem::LeftMousePressed) {
-			// call event;
-			GameEventsManager::GetInstance()->TakeDamage();
-		}
+		
+
 
 	}
 
@@ -54,6 +56,10 @@ public:
 
 	}
 
+	void Attack() {
+		std::cout << "Attacking" << std::endl;
+		// To-Do : Spawn ray cast out of camera center, and deal damage to any colliders with a health component.
+	}
 
 private:
 

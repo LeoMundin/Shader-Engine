@@ -40,7 +40,7 @@ public:
 		_healthBarSprite = SpriteRenderer(spriteShader);
 
 		// Subscribe to event
-		GameEventsManager::GetInstance()->OnTakeDamage.AddSubscriber([this](){ this->OnHealthReduction(); });
+		GameEventsManager::GetInstance()->Player->OnTakeDamage.AddSubscriber([this](){ this->OnHealthReduction();});
 
 	};
 
@@ -58,10 +58,11 @@ public:
 
 	void OnHealthReduction() {
 	    std::cout << "Player took damage..." << std::endl;
-		if (MaxNumHealthBars > 0) {
-
-			MaxNumHealthBars -- ;
+		if (MaxNumHealthBars <= 0) {
+			return;
+			
 		}
+		MaxNumHealthBars -= 1;
 
 	}
 	void OnHealthReduction(int numBars) {

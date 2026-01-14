@@ -3,18 +3,24 @@
 #define GAME_EVENTS_MANAGER_H
 
 #include "../../Engine/Events/Event.h"
+#include "InputEvents.h"
+#include "PlayerEvents.h"
 #include <mutex>
 
 class GameEventsManager
 {
 public:
-    GameEventsManager(GameEventsManager&) = delete;
-    void operator=(const GameEventsManager&) = delete;
 
+    InputEvents *Input;
+    PlayerEvents *Player;
+
+    GameEventsManager(GameEventsManager&) = delete;// Prevents duplication.
+    void operator=(const GameEventsManager&) = delete;// Prevents assignability.
+
+    /// <summary>
+    /// Retrieves the singleton instance of the GameEventsManager class.
+    /// </summary>
     static GameEventsManager* GetInstance();
-
-    Event OnTakeDamage;
-    void TakeDamage();
 
 private:
     static GameEventsManager* sp_instance;
@@ -22,6 +28,7 @@ private:
 
     GameEventsManager();
     ~GameEventsManager();
+
 };
 
 #endif

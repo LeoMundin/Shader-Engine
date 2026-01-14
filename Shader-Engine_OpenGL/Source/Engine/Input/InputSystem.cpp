@@ -8,6 +8,10 @@ bool InputSystem::LeftMousePressed = false;
 glm::vec2 InputSystem::_lastMousePos = glm::vec2(0,0) ;
 
 
+Event InputSystem::OnLeftMouseButtonDown;
+
+
+
 void InputSystem::OnKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 
@@ -25,6 +29,11 @@ void InputSystem::OnKeyCallback(GLFWwindow* window, int key, int scancode, int a
 void InputSystem::OnMouseButtonCallback(GLFWwindow* window, int button, int action, int mods){
     LeftMousePressed = false;
     LeftMousePressed = button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS ;
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
+        LeftMouseButtonDown();
+       
+         
+    }
 };
 
 void InputSystem::OnMousePosCallback(GLFWwindow* window, double xpos, double ypos)
@@ -42,6 +51,12 @@ void InputSystem::OnMousePosCallback(GLFWwindow* window, double xpos, double ypo
 
 
 
+void InputSystem::LeftMouseButtonDown()
+{
+    if (OnLeftMouseButtonDown.HasSubscribers()) {
+        OnLeftMouseButtonDown.Invoke();
 
+    }
+}
 
 

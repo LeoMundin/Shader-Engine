@@ -11,7 +11,6 @@ SpriteRenderer Renderer;
 Texture* SpriteTexture;
 
 void ElderHex::OnAwake() {
-
     //PhysicsWorld->setGravity(rp3d::Vector3(0, -0.2, 0));
     TerrainGameObject = Terrain(&MainCamera, PhysicsWorld, &lightPos, &PhysicsCommon);
 
@@ -19,6 +18,7 @@ void ElderHex::OnAwake() {
 
     PlayerGameObject = Player(&MainCamera, PhysicsWorld,GetScreenWidth(),GetScreenHeight());
     PlayerGameObject.addComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, PlayerGameObject.Rigidbody->Rigidbody, PlayerGameObject.Transform);
+    std::cout << "Ouch";
 
 }
 
