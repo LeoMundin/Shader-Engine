@@ -158,7 +158,9 @@ class TuftEngine {
             // Clear depth information and draw UI ontop of 3D elements
             glClear(GL_DEPTH_BUFFER_BIT);
             glDisable(GL_DEPTH_TEST);
+            glDepthMask(GL_FALSE);
             OnRenderUI();
+            glDepthMask(GL_TRUE);
             glEnable(GL_DEPTH_TEST);
 
             glfwSwapBuffers(MainWindow);// Swaps the rendered, back buffer, with the front buffer to display rendered content.

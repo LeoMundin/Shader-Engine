@@ -8,6 +8,8 @@
 #include "Player/PlayerGameObject.h"
 #include "GameObjects/Terrain.h"
 #include "Components/HealthComponent.h"
+#include "GameObjects/TargetDummy.h"
+#include "GameObjects/Trap.h"
 
 // To-Do : Convert to sort through a list of scene objects and manage extra game systems such as Level management and Input.
 class ElderHex : public TuftEngine 
@@ -20,7 +22,11 @@ public:
 	Player PlayerGameObject;
 	Terrain TerrainGameObject;
 
-	
+	TargetDummy Dummy;
+	Trap spikes;
+
+	Texture _spriteTexture = Texture("Assets/Textures/crosshair.png", false);
+
 
 
 protected:

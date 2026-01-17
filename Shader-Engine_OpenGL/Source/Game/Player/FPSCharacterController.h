@@ -59,9 +59,10 @@ public:
 
 	void Attack() {
 		
-		rp3d::Vector3 startPoint(TransformComponent::Vector3GlmToRp3d(_transformComponent->Position));
-		rp3d::Vector3 endPoint(TransformComponent::Vector3GlmToRp3d(_camera->Forward * 1));
-		rp3d::Ray ray(startPoint, endPoint);
+		rp3d::Vector3 startPoint(TransformComponent::Vector3GlmToRp3d(_camera->Position));
+		rp3d::Vector3 endPoint(TransformComponent::Vector3GlmToRp3d(_camera->Position + _camera->Forward));
+		std::cout << glm::to_string(_camera->Position + _camera->Forward) << std::endl;
+		rp3d::Ray ray(startPoint, endPoint * 3);
 
 		// Create an instance of your callback class
 		Raycast raycast;
@@ -69,7 +70,7 @@ public:
 		_physicsWorld->raycast(ray, &raycast);
 		if (raycast.hit) {
 			std::cout << "Attacking" << std::endl;
-			//raycast.hitCollider->Collider->setIsTrigger(true);
+			raycast.hitCollider->Collider->setIsTrigger(true);
 		}
 	}
 

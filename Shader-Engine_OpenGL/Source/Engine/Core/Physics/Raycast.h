@@ -21,6 +21,7 @@ public:
         hitNormal = info.worldNormal;
         hitFraction = info.hitFraction;
 
+
         // Pulling collider component from physics collider.
         hitCollider = static_cast<ColliderComponent*>(info.collider->getUserData());
 
