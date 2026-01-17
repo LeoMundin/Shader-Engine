@@ -100,9 +100,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WITH_MINIAUDIO;WITH_WAV;WITH_MP3;WITH_FLAC;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\External\Include\reactphysics3d;$(SolutionDir)\External\Include\KHR;$(SolutionDir)\External\Include\stbi;$(SolutionDir)\External\Include\glm;$(SolutionDir)\External\Include\GLFW;$(SolutionDir)\External\Include\assimp;$(SolutionDir)\External\Include\glad;$(SolutionDir)\External\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\External\Include\SoLoud;$(SolutionDir)\External\Include\reactphysics3d;$(SolutionDir)\External\Include\KHR;$(SolutionDir)\External\Include\stbi;$(SolutionDir)\External\Include\glm;$(SolutionDir)\External\Include\GLFW;$(SolutionDir)\External\Include\assimp;$(SolutionDir)\External\Include\glad;$(SolutionDir)\External\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,9 +117,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WITH_MINIAUDIO;WITH_WAV;WITH_MP3;WITH_FLAC;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\External\Include\reactphysics3d;$(SolutionDir)\External\Include\KHR;$(SolutionDir)\External\Include\stbi;$(SolutionDir)\External\Include\glm;$(SolutionDir)\External\Include\GLFW;$(SolutionDir)\External\Include\assimp;$(SolutionDir)\External\Include\glad;$(SolutionDir)\External\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\External\Include\SoLoud;$(SolutionDir)\External\Include\reactphysics3d;$(SolutionDir)\External\Include\KHR;$(SolutionDir)\External\Include\stbi;$(SolutionDir)\External\Include\glm;$(SolutionDir)\External\Include\GLFW;$(SolutionDir)\External\Include\assimp;$(SolutionDir)\External\Include\glad;$(SolutionDir)\External\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,6 +143,54 @@
     <ClCompile Include="Source\Game\Events\GameEventsManager.cpp" />
     <ClCompile Include="Source\Game\Events\InputEvents.h" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_audiosource.cpp" />
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_codegen.cpp" />
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_core_basicops.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_core_faderops.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_core_filterops.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_core_getters.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_core_setters.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_core_voicegroup.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_core_voiceops.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_fader.cpp" />
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_fft.cpp" />
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_file.cpp" />
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_miniaudio.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_misc.cpp" />
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_thread.cpp" />
+    <ClCompile Include="Source\Engine\Audio\SoLoud\soloud_wav.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Audio\SoLoud\stb_vorbis.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Engine\Core\Core.h" />
