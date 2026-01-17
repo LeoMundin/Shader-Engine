@@ -60,18 +60,18 @@ public:
 	}
 
 	// Quarternion Conversion
-	rp3d::Quaternion QuarternionGlmToRp3d(glm::quat glmQuat) {
+	static rp3d::Quaternion QuarternionGlmToRp3d(glm::quat glmQuat) {
 		return rp3d::Quaternion(glmQuat.x, glmQuat.y, glmQuat.z, glmQuat.w);
 	}
-	glm::quat QuarternionRp3dToGlm(rp3d::Quaternion rp3dQuat) {
+	static glm::quat QuarternionRp3dToGlm(rp3d::Quaternion rp3dQuat) {
 		return glm::quat(rp3dQuat.w, rp3dQuat.x, rp3dQuat.y, rp3dQuat.z);
 	}
 
 	// Vector Conversion
-	glm::vec3 Vector3Rp3dToGlm(rp3d::Vector3 rp3dVec3) {
+	static glm::vec3 Vector3Rp3dToGlm(rp3d::Vector3 rp3dVec3) {
 		return glm::vec3(rp3dVec3.x, rp3dVec3.y, rp3dVec3.z);
 	}
-	rp3d::Vector3 Vector3GlmToRp3d(glm::vec3 glmVec3) {
+	static rp3d::Vector3 Vector3GlmToRp3d(glm::vec3 glmVec3) {
 
 		return rp3d::Vector3(glmVec3.x, glmVec3.y, glmVec3.z);
 	}

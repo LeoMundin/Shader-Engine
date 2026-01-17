@@ -3,6 +3,7 @@
 #define CORE_H
 
 #include "Rendering/VAO.h"
+#include "Physics/Raycast.h"
 #include "Rendering/SpriteRenderer.h"
 #include "Rendering/Texture.h"
 #include "Rendering/Camera.h"

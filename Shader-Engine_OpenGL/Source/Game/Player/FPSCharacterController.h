@@ -15,11 +15,12 @@ public:
 	float MovementSpeed = 20.0f;
 	
 
-	FpsMovementComponent(Camera* renderCam,TransformComponent *transform, RigidbodyComponent *rigidbody) 
+	FpsMovementComponent(Camera* renderCam,TransformComponent *transform, RigidbodyComponent *rigidbody, rp3d::PhysicsWorld* physicsWorld)
 	{
 		_camera = renderCam;
 		_transformComponent = transform;
 		_rigidbodyComponent = rigidbody;
+		_physicsWorld = physicsWorld;
 
 		// Subscribe to Event
 		InputSystem::OnLeftMouseButtonDown.AddSubscriber([this]() {this->Attack();});
@@ -57,8 +58,19 @@ public:
 	}
 
 	void Attack() {
-		std::cout << "Attacking" << std::endl;
-		// To-Do : Spawn ray cast out of camera center, and deal damage to any colliders with a health component.
+		
+		rp3d::Vector3 startPoint(TransformComponent::Vector3GlmToRp3d(_transformComponent->Position));
+		rp3d::Vector3 endPoint(TransformComponent::Vector3GlmToRp3d(_camera->Forward * 1));
+		rp3d::Ray ray(startPoint, endPoint);
+
+		// Create an instance of your callback class
+		Raycast raycast;
+
+		_physicsWorld->raycast(ray, &raycast);
+		if (raycast.hit) {
+			std::cout << "Attacking" << std::endl;
+			//raycast.hitCollider->Collider->setIsTrigger(true);
+		}
 	}
 
 private:
@@ -66,6 +78,7 @@ private:
 	Camera* _camera;
 	TransformComponent* _transformComponent;
 	RigidbodyComponent* _rigidbodyComponent;
+	rp3d::PhysicsWorld* _physicsWorld;
 
 };
 

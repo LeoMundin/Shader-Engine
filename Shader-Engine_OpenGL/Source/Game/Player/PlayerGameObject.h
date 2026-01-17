@@ -30,7 +30,7 @@ public:
 		Rigidbody = addComponent<RigidbodyComponent>(physicsWorld, Transform);
 		Rigidbody->Rigidbody->setLinearDamping(2);
 
-		_characterController = addComponent<FpsMovementComponent>(camera,Transform,Rigidbody);
+		_characterController = addComponent<FpsMovementComponent>(camera,Transform,Rigidbody, physicsWorld);
 
 		Health = addComponent<HealthComponent>(_maxPlayerHealth);
 

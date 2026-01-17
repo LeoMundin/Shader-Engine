@@ -196,6 +196,7 @@
     <ClInclude Include="Source\Engine\Core\Core.h" />
     <ClInclude Include="Source\Engine\Core\Model_Loading\Mesh.h" />
     <ClInclude Include="Source\Engine\Core\Model_Loading\Model.h" />
+    <ClInclude Include="Source\Engine\Core\Physics\Raycast.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\Camera.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\EBO.h" />
     <ClInclude Include="Source\Engine\Core\Rendering\Shaders\Shader.h" />

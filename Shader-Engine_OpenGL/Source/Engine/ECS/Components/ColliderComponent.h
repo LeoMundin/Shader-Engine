@@ -25,6 +25,8 @@ public:
 			// Create the box shape
 			rp3d::BoxShape* boxShape = physicsCommon->createBoxShape(boxDimensions);
 			Collider = rigidbody->addCollider(boxShape, rigidbody->getTransform().identity());
+			Collider->setUserData(static_cast<void*>(this));
+
 			break;
 		}
 	}
