@@ -20,11 +20,11 @@ public:
         Transform->Scale = floorSize;
         Transform->Position = glm::vec3(20.0f, 1.0f, 25.0f);
 
-        addComponent<RenderComponent>(lightPos, camera, Transform, floorModel, terrainShader);
-        RigidbodyComponent* TerrainRigidbody = addComponent<RigidbodyComponent>(physicsWorld, Transform);
+        AddComponent<RenderComponent>(lightPos, camera, Transform, floorModel, terrainShader);
+        RigidbodyComponent* TerrainRigidbody = AddComponent<RigidbodyComponent>(physicsWorld, Transform);
         TerrainRigidbody->SetGravity(false);
         TerrainRigidbody->Rigidbody->setType(rp3d::BodyType::STATIC);
-        addComponent<ColliderComponent>
+        AddComponent<ColliderComponent>
             (physicsCommon,
                 ColliderComponent::EColliderShape::BOX,
                 TerrainRigidbody->Rigidbody,

@@ -31,11 +31,11 @@ public :
         floor.Transform->Scale = floorSize;
        
 
-        floor.addComponent<RenderComponent>(lightPos, camera, floor.Transform, floorModel, floorShader);
-        RigidbodyComponent* TerrainRigidbody = floor.addComponent<RigidbodyComponent>(physicsWorld, floor.Transform);
+        floor.AddComponent<RenderComponent>(lightPos, camera, floor.Transform, floorModel, floorShader);
+        RigidbodyComponent* TerrainRigidbody = floor.AddComponent<RigidbodyComponent>(physicsWorld, floor.Transform);
         TerrainRigidbody->SetGravity(false);
         TerrainRigidbody->Rigidbody->setType(rp3d::BodyType::STATIC);
-        floor.addComponent<ColliderComponent>
+        floor.AddComponent<ColliderComponent>
                                             (physicsCommon, 
                                              ColliderComponent::EColliderShape::BOX,
                                              TerrainRigidbody->Rigidbody, 
@@ -48,7 +48,7 @@ public :
         Model mountainsModel(mountainsPath);
         mountains.Transform->Position = glm::vec3(-10.0f, -0.5f,10.0f);
         mountains.Transform->Scale = glm::vec3(10.0f);
-        mountains.addComponent<RenderComponent>(lightPos, camera, mountains.Transform, mountainsModel, terrainShader);
+        mountains.AddComponent<RenderComponent>(lightPos, camera, mountains.Transform, mountainsModel, terrainShader);
 
 
 
@@ -59,32 +59,32 @@ public :
         glm::vec3 forwardBoxSize = glm::vec3(100.0f, 10.0f, 1.0f);
         boundingBoxForward.Transform->Position = glm::vec3(0.0f, 1.0f, 55.0f);
         boundingBoxForward.Transform->Scale = forwardBoxSize;
-        RigidbodyComponent* forwardRigidbody = boundingBoxForward.addComponent<RigidbodyComponent>(physicsWorld, boundingBoxForward.Transform);
-        boundingBoxForward.addComponent<ColliderComponent> (physicsCommon, ColliderComponent::EColliderShape::BOX, forwardRigidbody->Rigidbody,boundingBoxForward.Transform, boundingBoxForward.Transform->Vector3GlmToRp3d(forwardBoxSize));
+        RigidbodyComponent* forwardRigidbody = boundingBoxForward.AddComponent<RigidbodyComponent>(physicsWorld, boundingBoxForward.Transform);
+        boundingBoxForward.AddComponent<ColliderComponent> (physicsCommon, ColliderComponent::EColliderShape::BOX, forwardRigidbody->Rigidbody,boundingBoxForward.Transform, boundingBoxForward.Transform->Vector3GlmToRp3d(forwardBoxSize));
         forwardRigidbody->Rigidbody->setType(rp3d::BodyType::STATIC);    
 
         // BACKWARD BOUNDS
         glm::vec3 backwardBoxSize = glm::vec3(100.0f, 10.0f, 1.0f);
         boundingBoxBackward.Transform->Position = glm::vec3(0.0f, 1.0f, -5.0f);
         boundingBoxBackward.Transform->Scale = backwardBoxSize;
-        RigidbodyComponent* backwardRigidbody = boundingBoxBackward.addComponent<RigidbodyComponent>(physicsWorld, boundingBoxBackward.Transform);
-        boundingBoxBackward.addComponent<ColliderComponent> (physicsCommon, ColliderComponent::EColliderShape::BOX, backwardRigidbody->Rigidbody, boundingBoxBackward.Transform, boundingBoxBackward.Transform->Vector3GlmToRp3d(backwardBoxSize));
+        RigidbodyComponent* backwardRigidbody = boundingBoxBackward.AddComponent<RigidbodyComponent>(physicsWorld, boundingBoxBackward.Transform);
+        boundingBoxBackward.AddComponent<ColliderComponent> (physicsCommon, ColliderComponent::EColliderShape::BOX, backwardRigidbody->Rigidbody, boundingBoxBackward.Transform, boundingBoxBackward.Transform->Vector3GlmToRp3d(backwardBoxSize));
         backwardRigidbody->Rigidbody->setType(rp3d::BodyType::STATIC);
 
         // LEFT BOUNDS
         glm::vec3 leftBoxSize = glm::vec3(1.0f, 10.0f, 100.0f);
         boundingBoxLeft.Transform->Position = glm::vec3(80.0f, 1.0f, 0.0f);
         boundingBoxLeft.Transform->Scale = leftBoxSize;
-        RigidbodyComponent* leftRigidbody = boundingBoxLeft.addComponent<RigidbodyComponent>(physicsWorld, boundingBoxLeft.Transform);
-        boundingBoxLeft.addComponent<ColliderComponent> (physicsCommon, ColliderComponent::EColliderShape::BOX, leftRigidbody->Rigidbody, boundingBoxLeft.Transform, boundingBoxLeft.Transform->Vector3GlmToRp3d(leftBoxSize));
+        RigidbodyComponent* leftRigidbody = boundingBoxLeft.AddComponent<RigidbodyComponent>(physicsWorld, boundingBoxLeft.Transform);
+        boundingBoxLeft.AddComponent<ColliderComponent> (physicsCommon, ColliderComponent::EColliderShape::BOX, leftRigidbody->Rigidbody, boundingBoxLeft.Transform, boundingBoxLeft.Transform->Vector3GlmToRp3d(leftBoxSize));
         leftRigidbody->Rigidbody->setType(rp3d::BodyType::STATIC);      
 
         // RIGHT BOUNDS
         glm::vec3 rightBoxSize = glm::vec3(1.0f, 10.0f, 100.0f);
         boundingBoxRight.Transform->Position = glm::vec3(-20.0f, 1.0f, 0.0f);
         boundingBoxRight.Transform->Scale = rightBoxSize;
-        RigidbodyComponent* rightRigidbody = boundingBoxRight.addComponent<RigidbodyComponent>(physicsWorld, boundingBoxRight.Transform);
-        boundingBoxRight.addComponent<ColliderComponent> (physicsCommon, ColliderComponent::EColliderShape::BOX, rightRigidbody->Rigidbody, boundingBoxRight.Transform, boundingBoxRight.Transform->Vector3GlmToRp3d(rightBoxSize));
+        RigidbodyComponent* rightRigidbody = boundingBoxRight.AddComponent<RigidbodyComponent>(physicsWorld, boundingBoxRight.Transform);
+        boundingBoxRight.AddComponent<ColliderComponent> (physicsCommon, ColliderComponent::EColliderShape::BOX, rightRigidbody->Rigidbody, boundingBoxRight.Transform, boundingBoxRight.Transform->Vector3GlmToRp3d(rightBoxSize));
         rightRigidbody->Rigidbody->setType(rp3d::BodyType::STATIC);
 
 	}

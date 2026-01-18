@@ -27,12 +27,12 @@ public:
 		PlayerHealthBar.Height = 100.0f;
 
 		// Components
-		Rigidbody = addComponent<RigidbodyComponent>(physicsWorld, Transform);
+		Rigidbody = AddComponent<RigidbodyComponent>(physicsWorld, Transform);
 		Rigidbody->Rigidbody->setLinearDamping(2);
 
-		_characterController = addComponent<FpsMovementComponent>(camera,Transform,Rigidbody, physicsWorld);
+		_characterController = AddComponent<FpsMovementComponent>(camera,Transform,Rigidbody, physicsWorld);
 
-		Health = addComponent<HealthComponent>(_maxPlayerHealth);
+		Health = AddComponent<HealthComponent>(_maxPlayerHealth);
 
 	};
 

@@ -24,8 +24,11 @@ void ElderHex::OnAwake() {
     CrossHair = SpriteRenderer(spriteShader);
 
     PlayerGameObject = Player(&MainCamera, PhysicsWorld,GetScreenWidth(),GetScreenHeight());
-    PlayerGameObject.addComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, PlayerGameObject.Rigidbody->Rigidbody, PlayerGameObject.Transform);
-    std::cout << "Ouch";
+    PlayerGameObject.AddComponent<ColliderComponent>(&PhysicsCommon, ColliderComponent::EColliderShape::BOX, PlayerGameObject.Rigidbody->Rigidbody, PlayerGameObject.Transform);
+    
+    std::cout << glm::to_string(PlayerGameObject.GetComponent<TransformComponent>()->Position);
+
+  
 
 }
 

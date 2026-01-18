@@ -18,6 +18,11 @@ class ElderHex : public TuftEngine
 public:
 	ElderHex(unsigned int width, unsigned int height) :TuftEngine(width, height) {};
 
+
+
+
+
+
 	// Scene Assets
 	Player PlayerGameObject;
 	Terrain TerrainGameObject;

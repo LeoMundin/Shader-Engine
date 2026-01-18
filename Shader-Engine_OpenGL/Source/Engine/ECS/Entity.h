@@ -5,7 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-
+#include <map>
+#include <typeindex>
 
 #include "Component.h"
 
@@ -13,38 +14,44 @@ class Entity
 {
 public:
 
-	// TODO - Implement hash table to store components with ID for easy look up.
+	// TODO - Comment
 
 
 	template <typename T, typename ... TArgs>
-	T* addComponent(TArgs&&... args) {
+	T* AddComponent(TArgs&&... args) {
 		auto component = std::make_shared<T>(std::forward<TArgs>(args)...);
 		component->owner = this;
-		_components.emplace_back(component);
+		_components[typeid(T)] = component;
 		return component.get();
 	}
 
+	template <class T>
+	T* GetComponent() {
+		auto component = _components.find(typeid(T));    
+		if (component == _components.end())
+			return nullptr;
 
-	// TO DO : implement a get component function
+		return static_cast<T*>(component->second.get());
+	}
 
 	void Update(float deltaTime) {
 		if (!_isActive) return;
 		for (auto& component : _components) {
-			component->Update(deltaTime);
+			component.second->Update(deltaTime);
 		}
 	};
 	
 	void Render() {
 		if (!_isActive) return;
 		for (auto& component : _components) {
-			component->Render();
+			component.second->Render();
 		}
 	};
 
 	void RenderUI() {
 		if (!_isActive) return;
 		for (auto& component : _components) {
-			component->RenderUI();
+			component.second->RenderUI();
 		}
 	};
 
@@ -57,7 +64,8 @@ private:
 
 	bool _isActive = true ;
 
-	std::vector<std::shared_ptr<Component>> _components;
+	std::map<std::type_index, std::shared_ptr<Component>> _components;
+
 };
 
 #endif

@@ -22,6 +22,11 @@ class TuftEngine {
 
     public:
 
+
+        // To-Do : Create game 
+
+
+
         // System
         float DeltaTime;
 
@@ -78,7 +83,7 @@ class TuftEngine {
                 DeltaTime = _currentFrameTime - _lastFrameTime;
 
                 ProcessInput();
-                Update();
+                Update(); // Move to Game
                 Render();
 
                 _lastFrameTime = _currentFrameTime;

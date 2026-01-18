@@ -19,7 +19,7 @@ public :
 
 	GameObject() 
 	{
-		Transform = this->addComponent<TransformComponent>(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1));
+		Transform = this->AddComponent<TransformComponent>(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), glm::vec3(1));
 	}
 
 
