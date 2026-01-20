@@ -2,7 +2,7 @@
 #ifndef FPSCHARACTERCONTROLLER_H
 #define FPSCHARACTERCONTROLLER_H
 
-#include "../ElderHex.h"
+#include "../../Engine/TuftEngine.h"
 
 
 /// <summary>

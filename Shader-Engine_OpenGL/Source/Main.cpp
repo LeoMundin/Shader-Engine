@@ -1,4 +1,4 @@
-#include "Game/ElderHex.h"
+#include "Game/Scenes/Level_1.h"
 
 #include "soloud.h"
 #include "soloud_wav.h"
@@ -8,7 +8,7 @@
 const int SCREEN_WIDTH = 1600;
 const int SCREEN_HEIGHT = 1200;
 
-ElderHex game(SCREEN_WIDTH, SCREEN_HEIGHT);
+TuftEngine game(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 int main(){
 
@@ -27,6 +27,7 @@ int main(){
     music.setVolume(0.5);
     audio.play(music);
 
+    game.AddScene( new Level_1());
     // Start Game
     game.init();
     return 0;

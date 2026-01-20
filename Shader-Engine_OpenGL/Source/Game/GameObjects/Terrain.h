@@ -2,7 +2,7 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
-#include "../ElderHex.h"
+#include "../../Engine/TuftEngine.h"
 
 class Terrain
 {

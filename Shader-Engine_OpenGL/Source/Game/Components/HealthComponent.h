@@ -2,7 +2,7 @@
 #ifndef HEALTHCOMPONENT_H
 #define HEALTHCOMPONENT_H
 
-#include "../ElderHex.h"
+#include "../../Engine/TuftEngine.h"
 
 class HealthComponent : public Component
 {

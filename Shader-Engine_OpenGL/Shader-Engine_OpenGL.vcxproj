@@ -139,9 +139,11 @@
     <ClCompile Include="Source\Engine\Core\Rendering\VAO.cpp" />
     <ClCompile Include="Source\Engine\Core\Rendering\VBO.cpp" />
     <ClCompile Include="Source\Engine\Input\InputSystem.cpp" />
-    <ClCompile Include="Source\Game\ElderHex.cpp" />
+    <ClCompile Include="Source\Engine\Scene.cpp" />
+    <ClCompile Include="Source\Engine\TuftEngine.cpp" />
     <ClCompile Include="Source\Game\Events\GameEventsManager.cpp" />
     <ClCompile Include="Source\Game\Events\InputEvents.h" />
+    <ClCompile Include="Source\Game\Scenes\Level_1.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Engine\Audio\SoLoud\soloud.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -217,7 +219,6 @@
     <ClInclude Include="Source\Engine\Scene.h" />
     <ClInclude Include="Source\Engine\TuftEngine.h" />
     <ClInclude Include="Source\Game\Components\HealthComponent.h" />
-    <ClInclude Include="Source\Game\ElderHex.h" />
     <ClInclude Include="Source\Game\Events\GameEventsManager.h" />
     <ClInclude Include="Source\Game\Events\PlayerEvents.h" />
     <ClInclude Include="Source\Game\GameObjects\TargetDummy.h" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Source\Game\Player\FPSCharacterController.h" />
     <ClInclude Include="Source\Game\Player\PlayerGameObject.h" />
     <ClInclude Include="Source\Game\Player\UI\HealthBar.h" />
+    <ClInclude Include="Source\Game\Scenes\Level_1.h" />
     <ClInclude Include="Source\Header\Camera.h" />
     <ClInclude Include="Source\Header\CameraComponent.h" />
     <ClInclude Include="Source\Header\ColliderComponent.h" />

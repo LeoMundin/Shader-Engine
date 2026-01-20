@@ -2,7 +2,7 @@
 #ifndef TARGET_DUMMY_H
 #define TARGET_DUMMY_H
 
-#include "../ElderHex.h"
+#include "../../Engine/TuftEngine.h"
 
 
 class TargetDummy : public GameObject

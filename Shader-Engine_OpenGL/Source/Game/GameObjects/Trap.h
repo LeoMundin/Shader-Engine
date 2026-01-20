@@ -2,8 +2,7 @@
 #ifndef TRAP_H
 #define TRAP_H
 
-#include "../ElderHex.h"
-
+#include "../../Engine/TuftEngine.h"
 
 class Trap : public GameObject
 {

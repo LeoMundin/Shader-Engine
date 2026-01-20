@@ -2,7 +2,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../ElderHex.h"
+
 #include "FPSCharacterController.h"
 #include "../Components/HealthComponent.h"
 #include "UI/HealthBar.h"

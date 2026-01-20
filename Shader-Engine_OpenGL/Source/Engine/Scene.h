@@ -2,31 +2,48 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-// Using game engine
 
+#include <list>
+
+
+class TuftEngine ;
 class Scene 
 {
 
 public :
 
-	// Game Essentials -
-	// Lighting
-	// Camera
+	// To-Do: bool IsComplete = false;
 
+	std::string ID = "Scene";
+	TuftEngine* Engine;
+	rp3d::PhysicsWorld* PhysicSimulation;
+	Scene() {};
+	
+	// Loads game objects into Scene. 
+	virtual void Load(TuftEngine* enginePtr, rp3d::PhysicsWorld* physicsSim) {  // To-Do: Could be converted to read from file.
+		Engine = enginePtr;
+		PhysicSimulation = physicsSim;
 
-	// list of Level Objects
+		// Add GameObjects to scene list.
+	}
 
-	// Load level Objects
+	// Lifecycle hooks
+	virtual void Awake() {}; // Runs once before Game loop starts.
+	virtual void Update() {}; // Runs every frame to update game logic. 
+	virtual void Render() {}; // Updates rendering every frame.
+	virtual void RenderUI() {}; // Updates rendering for UI which whould be layered ontop of game, every frame.
 
-	// Process inputs
-	// Update
-	// Render
+	// To-Do: void Restart() {};
 
-	// complete scene 
+protected: 
 
-private: 
+	std::list<Entity> _sceneObjects;
+	
 
-	// Instantialise Objects
+	glm::vec3 _lightPosition = glm::vec3(0.0f, 100.0f, 0.0f);;
+	Camera _mainCamera = Camera(glm::vec3(0));
+
+	// To-Do: void Complete() {}; // Marks this scene as finished for the engine to move scene.
 
 };
 
